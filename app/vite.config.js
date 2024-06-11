@@ -1,12 +1,12 @@
-import { defineConfig } from "vite";
-import { nodePolyfills } from "vite-plugin-node-polyfills";
-import EnvironmentPlugin from "vite-plugin-environment";
+import { defineConfig } from 'vite';
+import { nodePolyfills } from 'vite-plugin-node-polyfills';
+import EnvironmentPlugin from 'vite-plugin-environment';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/",
+  base: '/',
   build: {
-    outDir: "build",
+    outDir: 'build',
   },
-  plugins: [nodePolyfills(), EnvironmentPlugin("all")],
+  plugins: [nodePolyfills(), EnvironmentPlugin('all')],
 });

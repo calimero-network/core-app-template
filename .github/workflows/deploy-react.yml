@@ -19,7 +19,6 @@ permissions:
 defaults:
   run:
     working-directory: ./app
-    shell: bash
 
 jobs:
   # Build job
