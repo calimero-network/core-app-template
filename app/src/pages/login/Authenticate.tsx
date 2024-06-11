@@ -1,7 +1,7 @@
 import LoginSelector from '@calimero-is-near/calimero-p2p-sdk/lib/wallets/LoginSelector';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import ContentWrapper from 'src/components/login/ContentWrapper';
+import ContentWrapper from '../../components/login/ContentWrapper';
 
 export default function Authenticate() {
   const navigate = useNavigate();

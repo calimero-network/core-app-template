@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
-import EnvironmentPlugin from 'vite-plugin-environment';
+import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -8,5 +8,5 @@ export default defineConfig({
   build: {
     outDir: 'build',
   },
-  plugins: [nodePolyfills(), EnvironmentPlugin('all')],
+  plugins: [nodePolyfills(), react()],
 });

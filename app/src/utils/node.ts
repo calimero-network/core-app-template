@@ -1,4 +1,3 @@
-import { NetworkId } from '@near-wallet-selector/core';
 import { getAppEndpointKey, setAppEndpointKey } from './storage';
 
 export function getNodeUrl(): string {
@@ -13,9 +12,6 @@ export function getNodeUrl(): string {
   return storageKey ?? '';
 }
 
-export function getNearEnvironment(): NetworkId {
-  return (
-    (import.meta.env['VITE_NEAR_ENVIRONMENT'] as NetworkId) ??
-    ('testnet' as NetworkId)
-  );
+export function getNearEnvironment(): string {
+  return import.meta.env['VITE_NEAR_ENVIRONMENT'] ?? 'testnet';
 }
