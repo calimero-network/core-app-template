@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getNodeUrl } from '../../utils/node';
-import MetamaskWrapper from '@calimero-is-near/calimero-p2p-sdk/lib/wallets/MetamaskLogin/MetamaskWrapper';
+import { MetamaskWrapper } from '@calimero-is-near/calimero-p2p-sdk';
 import ContentWrapper from '../../components/login/ContentWrapper';
 import { getApplicationId } from '../../utils/application';
 
