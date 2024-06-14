@@ -9,8 +9,17 @@ runs:
 
     - name: Install dependencies
       shell: bash
-      run: pnpm install
+      run: |
+        cd ${{ inputs.working-directory }}
+        pnpm install
 
     - name: Build
       shell: bash
-      run: pnpm build
+      run: |
+        cd ${{ inputs.working-directory }}
+        pnpm build
+
+inputs:
+  working-directory:
+    description: "Working directory"
+    default: "./app"
