@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "homepage": "https://calimero-network.github.io/core-app-template/",
   "dependencies": {
     "@calimero-is-near/calimero-p2p-sdk": "0.0.19",
     "@near-wallet-selector/modal-ui": "^8.9.8",

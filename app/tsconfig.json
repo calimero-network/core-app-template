@@ -13,9 +13,10 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
+    "outDir": "build",
     "jsx": "react",
     "types": ["styled-components", "vite/client", "node"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "custom.d.ts", "src/assets"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "build"]
 }
