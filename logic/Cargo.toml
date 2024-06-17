@@ -1,0 +1,19 @@
+[package]
+name = "logic"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+calimero-sdk = { git = "ssh://git@github.com/calimero-network/core.git", branch = "master" }
+
+[profile.app-release]
+inherits = "release"
+codegen-units = 1
+opt-level = "z"
+lto = true
+debug = false
+panic = "abort"
+overflow-checks = true

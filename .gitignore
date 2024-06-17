@@ -1,2 +1,7 @@
 # misc
 .DS_Store
+
+.idea/
+res/
+data/
+target/
