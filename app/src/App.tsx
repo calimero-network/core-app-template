@@ -8,7 +8,7 @@ import MetamaskPage from './pages/login/Metamask';
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/core-app-template/">
       <Routes>
         <Route path="/" element={<SetupPage />} />
         <Route path="/auth" element={<Authenticate />} />
