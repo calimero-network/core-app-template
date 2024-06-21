@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://calimero-network.github.io/core-app-template/",
   "dependencies": {
-    "@calimero-is-near/calimero-p2p-sdk": "0.0.19",
+    "@calimero-is-near/calimero-p2p-sdk": "0.0.22",
     "@near-wallet-selector/modal-ui": "^8.9.8",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
@@ -35,7 +35,6 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "gh-pages": "^6.1.1",
-    "husky": "^9.0.11",
     "prettier": "3.3.2",
     "typescript": "^4.9.5",
     "typescript-eslint": "^7.13.0",
@@ -52,8 +51,7 @@
     "preview": "vite preview",
     "predeploy": "pnpm run build",
     "deploy": "gh-pages -d build",
-    "prettier": "exec prettier . --write",
-    "prepare": "husky"
+    "prettier": "exec prettier . --write"
   },
   "eslintConfig": {
     "extends": [

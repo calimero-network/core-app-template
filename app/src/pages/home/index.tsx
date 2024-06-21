@@ -10,10 +10,16 @@ const FullPageCenter = styled.div`
   align-items: center;
 `;
 
+const TextStyle = styled.div`
+  color: white;
+`;
+
 export default function HomePage() {
   return (
     <FullPageCenter>
-      <span> Welcome to home page </span>
+      <TextStyle>
+        <span> Welcome to home page!</span>
+      </TextStyle>
     </FullPageCenter>
   );
 }
