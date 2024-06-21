@@ -1,6 +1,9 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+echo "usao"
+
+
 # Check for changes in the 'app' directory
 if git diff --cached --name-only | grep -q '^app/'; then
   echo "Running checks for the React app..."
