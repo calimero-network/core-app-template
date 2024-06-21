@@ -1,6 +1,7 @@
 {
 	"scripts": {
-		"pre-commit": "pnpm run pre-commit"
+		"pre-commit": "pnpm run pre-commit",
+		"prepare": "husky install"
 	},
 	"devDependencies": {
 		"husky": "^9.0.11"

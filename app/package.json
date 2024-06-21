@@ -51,7 +51,8 @@
     "preview": "vite preview",
     "predeploy": "pnpm run build",
     "deploy": "gh-pages -d build",
-    "prettier": "exec prettier . --write"
+    "prettier": "exec prettier . --write",
+    "pre-commit": "cd .. && pnpm pre-commit"
   },
   "eslintConfig": {
     "extends": [
