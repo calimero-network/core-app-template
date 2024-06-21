@@ -1,0 +1,8 @@
+{
+	"scripts": {
+		"pre-commit": "pnpm run pre-commit"
+	},
+	"devDependencies": {
+		"husky": "^9.0.11"
+	}
+}
