@@ -1,8 +1,9 @@
+# Core App Template
 
-# Logic
+## Logic
 
 ```bash title="Terminal"
-cargo build
+cd logic
 ```
 
 ```bash title="Terminal"
@@ -17,7 +18,11 @@ chmod +x ./build.sh
 
 TBD - use app in node
 
-# App
+## App
+
+```bash title="Terminal"
+cd app
+```
 
 ```bash title="Terminal"
 pnpm install
