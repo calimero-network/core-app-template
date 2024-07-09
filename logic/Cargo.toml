@@ -7,7 +7,7 @@ edition = "2021"
 crate-type = ["cdylib"]
 
 [dependencies]
-calimero-sdk = { git = "ssh://git@github.com/calimero-network/core.git", branch = "master" }
+calimero-sdk = { git = "https://github.com/calimero-network/core" }
 
 [profile.app-release]
 inherits = "release"

@@ -26,8 +26,8 @@ impl AppState {
         self.count = count;
     }
 
-    pub fn increase_count(&mut self) {
-        self.count = self.count + 1;
+    pub fn increase_count(&mut self, count: u32) {
+        self.count = self.count + count;
         app::emit!(Event::Increased);
     }
 

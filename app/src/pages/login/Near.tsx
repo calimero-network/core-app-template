@@ -5,7 +5,7 @@ import { NearLogin } from '@calimero-is-near/calimero-p2p-sdk';
 
 import '@near-wallet-selector/modal-ui/styles.css';
 import ContentWrapper from '../../components/login/ContentWrapper';
-import { getApplicationId } from '../../utils/application';
+import { getApplicationId } from '../../utils/env';
 import { getNearEnvironment, getNodeUrl } from '../../utils/node';
 
 export default function NearPage() {
