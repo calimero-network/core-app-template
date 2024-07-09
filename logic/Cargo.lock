@@ -29,7 +29,7 @@ dependencies = [
 [[package]]
 name = "calimero-sdk"
 version = "0.1.0"
-source = "git+https://github.com/calimero-network/core#1f2826374227a8b3979f584e609491c929917793"
+source = "git+https://github.com/calimero-network/core#a1376c7f823397015fa4d45b7542d6a05c95a1a8"
 dependencies = [
  "borsh",
  "calimero-sdk-macros",
@@ -41,7 +41,7 @@ dependencies = [
 [[package]]
 name = "calimero-sdk-macros"
 version = "0.1.0"
-source = "git+https://github.com/calimero-network/core#1f2826374227a8b3979f584e609491c929917793"
+source = "git+https://github.com/calimero-network/core#a1376c7f823397015fa4d45b7542d6a05c95a1a8"
 dependencies = [
  "prettyplease",
  "proc-macro2",
