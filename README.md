@@ -14,10 +14,6 @@ chmod +x ./build.sh
 ./build.sh
 ```
 
-## Node dev mode
-
-TBD - use app in node
-
 ## App
 
 ```bash title="Terminal"
@@ -37,3 +33,6 @@ pnpm dev
 ```
 
 Open app in browser and connect to running node.
+
+For more information how to build app check our docs:
+https://calimero-network.github.io/build/quickstart
