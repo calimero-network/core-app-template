@@ -29,10 +29,11 @@ dependencies = [
 [[package]]
 name = "calimero-sdk"
 version = "0.1.0"
-source = "git+ssh://git@github.com/calimero-network/core.git?branch=master#cf9d816b98708c39b154de24b81cc36f57b1bea5"
+source = "git+https://github.com/calimero-network/core#a1376c7f823397015fa4d45b7542d6a05c95a1a8"
 dependencies = [
  "borsh",
  "calimero-sdk-macros",
+ "cfg-if",
  "serde",
  "serde_json",
 ]
@@ -40,7 +41,7 @@ dependencies = [
 [[package]]
 name = "calimero-sdk-macros"
 version = "0.1.0"
-source = "git+ssh://git@github.com/calimero-network/core.git?branch=master#cf9d816b98708c39b154de24b81cc36f57b1bea5"
+source = "git+https://github.com/calimero-network/core#a1376c7f823397015fa4d45b7542d6a05c95a1a8"
 dependencies = [
  "prettyplease",
  "proc-macro2",
@@ -48,6 +49,12 @@ dependencies = [
  "syn",
  "thiserror",
 ]
+
+[[package]]
+name = "cfg-if"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
 name = "cfg_aliases"

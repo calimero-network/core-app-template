@@ -20,3 +20,7 @@ export const getAppEndpointKey = (): string | null => {
 export const setAppEndpointKey = (url: string) => {
   localStorage.setItem(APP_URL, JSON.stringify(url));
 };
+
+export const clearAppEndpoint = () => {
+  localStorage.removeItem(APP_URL);
+};
