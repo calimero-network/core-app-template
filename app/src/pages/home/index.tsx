@@ -53,9 +53,6 @@ export default function HomePage() {
   const [count, setCount] = useState<number | null>(null);
 
   async function increaseCounter() {
-    //send mut call to node
-    //fetch result from node
-
     const params: IncreaseCountRequest = {
       count: 1,
     };
@@ -66,14 +63,11 @@ export default function HomePage() {
       return;
     }
     if (result.data) {
-      getCount();
+      setCount(result.data);
     }
   }
 
   async function getCount() {
-    //send mut call to node
-    //fetch result from node
-
     const params: GetCountRequest = {};
     const result: ResponseData<GetCountResponse> =
       await new ClientApiDataSource().getCount(params);

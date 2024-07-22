@@ -28,4 +28,5 @@ export interface ClientApi {
     params: IncreaseCountRequest,
   ): ApiResponse<IncreaseCountResponse>;
   reset(params: ResetRequest): ApiResponse<ResetResponse>;
+  getCount(params: GetCountRequest): ApiResponse<GetCountResponse>;
 }

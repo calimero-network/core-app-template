@@ -3,6 +3,7 @@ import {
   Header,
   JsonRpcClient,
   RequestConfig,
+  WsSubscriptionsClient,
   createAuthHeader,
 } from '@calimero-is-near/calimero-p2p-sdk';
 import { getContextId, getRpcPath } from '../../utils/env';
@@ -20,6 +21,10 @@ import {
 
 export function getJsonRpcClient() {
   return new JsonRpcClient(getAppEndpointKey() ?? '', getRpcPath());
+}
+
+export function getWsSubscriptionsClient() {
+  return new WsSubscriptionsClient(getAppEndpointKey() ?? '', '/ws');
 }
 
 export class ClientApiDataSource implements ClientApi {
@@ -48,7 +53,7 @@ export class ClientApiDataSource implements ClientApi {
     );
 
     return {
-      data: { count: response?.result?.output?.count ?? 0 },
+      data: { count: response?.result?.output ?? 0 },
       error: null,
     };
   }
