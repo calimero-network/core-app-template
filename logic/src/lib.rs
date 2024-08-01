@@ -1,5 +1,3 @@
-use core::num;
-
 use calimero_sdk::{
     app,
     borsh::{BorshDeserialize, BorshSerialize},
