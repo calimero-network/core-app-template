@@ -1,13 +1,21 @@
-import { ResponseData } from '@calimero-is-near/calimero-p2p-sdk';
+import {
+  NodeEvent,
+  ResponseData,
+  SubscriptionsClient,
+} from '@calimero-is-near/calimero-p2p-sdk';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { ClientApiDataSource } from '../../api/dataSource/ClientApiDataSource';
+import {
+  ClientApiDataSource,
+  getWsSubscriptionsClient,
+} from '../../api/dataSource/ClientApiDataSource';
 import {
   GetCountRequest,
   GetCountResponse,
   IncreaseCountRequest,
   IncreaseCountResponse,
 } from '../../api/clientApi';
+import { getContextId } from '../../utils/env';
 
 const FullPageCenter = styled.div`
   display: flex;
@@ -62,9 +70,6 @@ export default function HomePage() {
       console.log('Error:', result.error);
       return;
     }
-    if (result.data) {
-      setCount(result.data);
-    }
   }
 
   async function getCount() {
@@ -76,15 +81,30 @@ export default function HomePage() {
       return;
     }
     if (result.data) {
-      console.log('Count:', result.data);
       setCount(result.data.count);
-    } else {
-      console.log('Error:', result.error);
     }
   }
 
   useEffect(() => {
     getCount();
+  }, []);
+
+  const observeNodeEvents = async () => {
+    let subscriptionsClient: SubscriptionsClient = getWsSubscriptionsClient();
+    await subscriptionsClient.connect();
+
+    subscriptionsClient.subscribe([getContextId()]);
+
+    subscriptionsClient?.addCallback((data: NodeEvent) => {
+      if (data.data.events && data.data.events.length > 0) {
+        let currentValue = String.fromCharCode(...data.data.events[0].data);
+        setCount(parseInt(currentValue));
+      }
+    });
+  };
+
+  useEffect(() => {
+    observeNodeEvents();
   }, []);
 
   return (

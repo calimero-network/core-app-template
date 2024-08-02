@@ -6,7 +6,7 @@ use calimero_sdk::{
 
 #[app::event]
 pub enum Event {
-    Increased,
+    Increased(u32),
     Reset,
 }
 
@@ -32,7 +32,7 @@ impl AppState {
     pub fn increase_count(&mut self, count: u32) -> u32 {
         env::log(&format!("Increasing counter by {:?}", count));
         self.count = self.count + count;
-        app::emit!(Event::Increased);
+        app::emit!(Event::Increased(self.count));
         self.count
     }
 
