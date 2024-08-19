@@ -7,7 +7,7 @@ import {
   createAuthHeader,
 } from '@calimero-is-near/calimero-p2p-sdk';
 import { getContextId, getRpcPath } from '../../utils/env';
-import { getAppEndpointKey } from '../../utils/storage';
+import { getAppEndpointKey, getExecutorPublicKey } from '../../utils/storage';
 import {
   ClientApi,
   ClientMethod,
@@ -35,6 +35,12 @@ export class ClientApiDataSource implements ClientApi {
     if (authHeaders === null) {
       throw new Error('Failed to create auth headers');
     }
+
+    const publicKey = getExecutorPublicKey();
+    if (publicKey === null) {
+      throw new Error('Failed to get public key');
+    }
+
     const config: RequestConfig = {
       headers: authHeaders,
       timeout: 10000,
@@ -48,6 +54,7 @@ export class ClientApiDataSource implements ClientApi {
         contextId: getContextId(),
         method: ClientMethod.GET_COUNT,
         argsJson: params,
+        exectorPublicKey: Array.from(publicKey),
       },
       config,
     );
@@ -67,6 +74,12 @@ export class ClientApiDataSource implements ClientApi {
     if (authHeaders === null) {
       throw new Error('Failed to create auth headers');
     }
+
+    const publicKey = getExecutorPublicKey();
+    if (publicKey === null) {
+      throw new Error('Failed to get public key');
+    }
+
     const config: RequestConfig = {
       headers: authHeaders,
     };
@@ -79,6 +92,7 @@ export class ClientApiDataSource implements ClientApi {
         contextId: getContextId(),
         method: ClientMethod.INCREASE_COUNT,
         argsJson: params,
+        exectorPublicKey: Array.from(publicKey),
       },
       config,
     );
@@ -95,6 +109,12 @@ export class ClientApiDataSource implements ClientApi {
     if (authHeaders === null) {
       throw new Error('Failed to create auth headers');
     }
+
+    const publicKey = getExecutorPublicKey();
+    if (publicKey === null) {
+      throw new Error('Failed to get public key');
+    }
+
     const config: RequestConfig = {
       headers: authHeaders,
     };
@@ -107,6 +127,7 @@ export class ClientApiDataSource implements ClientApi {
         contextId: getContextId(),
         method: ClientMethod.RESET,
         argsJson: params,
+        exectorPublicKey: Array.from(publicKey),
       },
       config,
     );
