@@ -5,7 +5,7 @@ import { NearLogin } from '@calimero-is-near/calimero-p2p-sdk';
 
 import '@near-wallet-selector/modal-ui/styles.css';
 import ContentWrapper from '../../components/login/ContentWrapper';
-import { getApplicationId } from '../../utils/env';
+import { getContextId } from '../../utils/env';
 import { getNearEnvironment, getNodeUrl } from '../../utils/node';
 
 export default function NearPage() {
@@ -15,7 +15,7 @@ export default function NearPage() {
     <ContentWrapper>
       <WalletSelectorContextProvider network={getNearEnvironment()}>
         <NearLogin
-          appId={getApplicationId()}
+          contextId={getContextId()}
           rpcBaseUrl={getNodeUrl() ?? ''}
           successRedirect={() => navigate('/home')}
           navigateBack={() => navigate('/')}
