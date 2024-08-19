@@ -13,12 +13,17 @@ pub enum Event {
 #[app::state(emits = Event)]
 #[derive(Default, BorshDeserialize, BorshSerialize)]
 #[borsh(crate = "calimero_sdk::borsh")]
-struct AppState {
+pub struct AppState {
     count: u32,
 }
 
 #[app::logic]
 impl AppState {
+    #[app::init]
+    pub fn init() -> AppState {
+        AppState::default()
+    }
+
     pub fn get_count(&self) -> u32 {
         env::log("Get counter");
         self.count
