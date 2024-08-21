@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@calimero-is-near/calimero-p2p-sdk':
-        specifier: 0.0.28
-        version: 0.0.28(@near-wallet-selector/modal-ui@8.9.8(near-api-js@3.0.4))(@types/react@18.3.3)(bufferutil@4.0.8)(react-i18next@13.5.0(i18next@22.5.1)(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(rollup@4.18.0)(typescript@4.9.5)
+        specifier: 0.0.31
+        version: 0.0.31(@near-wallet-selector/modal-ui@8.9.8(near-api-js@3.0.4))(@types/react@18.3.3)(bufferutil@4.0.8)(react-i18next@13.5.0(i18next@22.5.1)(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(rollup@4.18.0)(typescript@4.9.5)
       '@near-wallet-selector/modal-ui':
         specifier: ^8.9.8
         version: 8.9.8(near-api-js@3.0.4)
@@ -977,8 +977,8 @@ packages:
     resolution: {integrity: sha512-XEFXSlxiG5td2EJRe8vOmRbaXVgfcBlszKujvVmWIK/UpywWljQCfzAv3RQCGujWQ1RD4YYWEAqDXfuJiy8f5Q==}
     engines: {node: '>=6.9.0'}
 
-  '@calimero-is-near/calimero-p2p-sdk@0.0.28':
-    resolution: {integrity: sha512-9IGiAJrdxj3kG+Tah2Zkk8+jedv9aAj9iUlXx+ttSOz6F6ZkqYp+kBBnAGKR/7gcqiNwPaUh7sUZQeJQFIm3TA==}
+  '@calimero-is-near/calimero-p2p-sdk@0.0.31':
+    resolution: {integrity: sha512-KhGTv/2clVzecgM+cCJSxqxQWd4eXV+0zKJxUtbvGzzZyjN+qXbl2Nwua0gNqTrDoaTWy5LaFbqymZmFmuFE4g==}
     peerDependencies:
       '@near-wallet-selector/modal-ui': ^8.9.7
 
@@ -2368,6 +2368,7 @@ packages:
 
   '@walletconnect/sign-client@2.10.6':
     resolution: {integrity: sha512-EvUWjaZBQu2yKnH5/5F2qzbuiIuUN9ZgrNKgvXkw5z1Dq5RJCks0S9/MFlKH/ZSGqXnLl7uAzBXtoX4sMgbCMA==}
+    deprecated: Reliability and performance greatly improved - please see https://github.com/WalletConnect/walletconnect-monorepo/releases
 
   '@walletconnect/time@1.0.2':
     resolution: {integrity: sha512-uzdd9woDcJ1AaBZRhqy5rNC9laqWGErfc4dxA9a87mPdKOgWMD85mcFo9dIYIts/Jwocfwn07EC6EzclKubk/g==}
@@ -7332,7 +7333,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
 
-  '@calimero-is-near/calimero-p2p-sdk@0.0.28(@near-wallet-selector/modal-ui@8.9.8(near-api-js@3.0.4))(@types/react@18.3.3)(bufferutil@4.0.8)(react-i18next@13.5.0(i18next@22.5.1)(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(rollup@4.18.0)(typescript@4.9.5)':
+  '@calimero-is-near/calimero-p2p-sdk@0.0.31(@near-wallet-selector/modal-ui@8.9.8(near-api-js@3.0.4))(@types/react@18.3.3)(bufferutil@4.0.8)(react-i18next@13.5.0(i18next@22.5.1)(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(rollup@4.18.0)(typescript@4.9.5)':
     dependencies:
       '@libp2p/crypto': 4.1.3
       '@libp2p/interface': 1.4.1
