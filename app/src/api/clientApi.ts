@@ -1,8 +1,6 @@
 import { ApiResponse } from '@calimero-is-near/calimero-p2p-sdk';
 
-export interface GetCountRequest {
-  // ignore
-}
+export interface GetCountRequest {}
 
 export interface GetCountResponse {
   count: number;

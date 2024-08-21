@@ -1,14 +1,8 @@
 import { marshalPublicKey } from '@libp2p/crypto/keys';
 import bs58 from 'bs58';
 
-export const CLIENT_KEY = 'client-key';
 export const APP_URL = 'app-url';
 export const CONTEXT_IDENTITY = 'context-identity';
-
-export interface ClientKey {
-  privateKey: string;
-  publicKey: string;
-}
 
 export const getAppEndpointKey = (): string | null => {
   try {
