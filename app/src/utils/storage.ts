@@ -5,7 +5,7 @@ export const APP_URL = 'app-url';
 export const CONTEXT_IDENTITY = 'context-identity';
 export const CONTEXT_ID = 'context-id';
 
-export const getAppEndpointKey = (): string | null => {
+export const getStorageAppEndpointKey = (): string | null => {
   try {
     if (typeof window !== 'undefined' && window.localStorage) {
       let storageRecord: string | null = localStorage.getItem(APP_URL);
@@ -22,7 +22,7 @@ export const getAppEndpointKey = (): string | null => {
   }
 };
 
-export const getExecutorPublicKey = (): Uint8Array | null => {
+export const getStorageExecutorPublicKey = (): Uint8Array | null => {
   try {
     if (typeof window !== 'undefined' && window.localStorage) {
       let contextIdentity: string = JSON.parse(
@@ -44,15 +44,15 @@ export const getExecutorPublicKey = (): Uint8Array | null => {
   }
 };
 
-export const setAppEndpointKey = (url: string) => {
+export const setStorageAppEndpointKey = (url: string) => {
   localStorage.setItem(APP_URL, JSON.stringify(url));
 };
 
-export const clearAppEndpoint = () => {
+export const clearStorageAppEndpoint = () => {
   localStorage.removeItem(APP_URL);
 };
 
-export const getContextId = (): string | null => {
+export const getStorageContextId = (): string | null => {
   if (typeof window !== 'undefined' && window.localStorage) {
     const storageContextId = localStorage.getItem(CONTEXT_ID);
     if (storageContextId) {
@@ -62,6 +62,6 @@ export const getContextId = (): string | null => {
   return null;
 };
 
-export const setContextId = (contextId: string) => {
+export const setStorageContextId = (contextId: string) => {
   localStorage.setItem(CONTEXT_ID, JSON.stringify(contextId));
 };

@@ -5,8 +5,7 @@ import { NearLogin } from '@calimero-is-near/calimero-p2p-sdk';
 
 import '@near-wallet-selector/modal-ui/styles.css';
 import ContentWrapper from '../../components/login/ContentWrapper';
-import { getNearEnvironment, getNodeUrl } from '../../utils/node';
-import { getContextId } from '../../utils/storage';
+import { getContextId, getNearEnvironment, getNodeUrl } from '../../utils/node';
 
 export default function NearPage() {
   const navigate = useNavigate();

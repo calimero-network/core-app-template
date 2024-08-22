@@ -15,7 +15,7 @@ import {
   IncreaseCountRequest,
   IncreaseCountResponse,
 } from '../../api/clientApi';
-import { getContextId } from '../../utils/env';
+import { getContextId } from '../../utils/node';
 
 const FullPageCenter = styled.div`
   display: flex;
@@ -92,7 +92,6 @@ export default function HomePage() {
   const observeNodeEvents = async () => {
     let subscriptionsClient: SubscriptionsClient = getWsSubscriptionsClient();
     await subscriptionsClient.connect();
-
     subscriptionsClient.subscribe([getContextId()]);
 
     subscriptionsClient?.addCallback((data: NodeEvent) => {
