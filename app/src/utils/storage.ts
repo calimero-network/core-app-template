@@ -54,7 +54,7 @@ export const clearAppEndpoint = () => {
 
 export const getContextId = (): string | null => {
   const storageContextId = localStorage.getItem(CONTEXT_ID);
-  if(storageContextId) {
+  if (storageContextId) {
     return JSON.parse(storageContextId);
   } else {
     return null;
@@ -63,4 +63,4 @@ export const getContextId = (): string | null => {
 
 export const setContextId = (contextId: string) => {
   localStorage.setItem(CONTEXT_ID, JSON.stringify(contextId));
-}
+};

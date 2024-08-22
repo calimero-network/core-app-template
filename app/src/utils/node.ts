@@ -1,4 +1,9 @@
-import { getAppEndpointKey, getContextId, setAppEndpointKey, setContextId } from './storage';
+import {
+  getAppEndpointKey,
+  getContextId,
+  setAppEndpointKey,
+  setContextId,
+} from './storage';
 
 export function getNodeUrl(): string {
   let storageKey = getAppEndpointKey();
