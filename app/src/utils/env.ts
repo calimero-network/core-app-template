@@ -1,11 +1,11 @@
 export function getApplicationId(): string {
-  return import.meta.env['VITE_APPLICATION_ID'] ?? 'invalid-app-id';
+  return import.meta.env['VITE_APPLICATION_ID'] ?? '';
 }
 
 export function getRpcPath(): string {
-  return import.meta.env['VITE_RPC_PATH'] ?? 'invalid-rpc-path';
+  return import.meta.env['VITE_RPC_PATH'] ?? '';
 }
 
-export function getContextId(): string {
-  return import.meta.env['VITE_CONTEXT_ID'] ?? 'invalid-context-id';
+export function getEnvContextId(): string {
+  return import.meta.env['VITE_CONTEXT_ID'] ?? '';
 }

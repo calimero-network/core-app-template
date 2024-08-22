@@ -1,28 +1,29 @@
+import { getEnvContextId } from './env';
 import {
-  getAppEndpointKey,
-  getContextId,
-  setAppEndpointKey,
-  setContextId,
+  getStorageAppEndpointKey,
+  getStorageContextId,
+  setStorageAppEndpointKey,
+  setStorageContextId,
 } from './storage';
 
 export function getNodeUrl(): string {
-  let storageKey = getAppEndpointKey();
+  let storageKey = getStorageAppEndpointKey();
 
   if (!storageKey) {
     let envKey: string = import.meta.env['VITE_NODE_URL'] ?? '';
-    setAppEndpointKey(envKey);
+    setStorageAppEndpointKey(envKey);
     return envKey;
   }
 
   return storageKey ?? '';
 }
 
-export function getStorageContextId(): string {
-  let storageContextId = getContextId();
+export function getContextId(): string {
+  let storageContextId = getStorageContextId();
 
   if (!storageContextId) {
-    let envKey: string = import.meta.env['VITE_NODE_CONTEXT_ID'] ?? '';
-    setContextId(envKey);
+    let envKey: string = getEnvContextId();
+    setStorageContextId(envKey);
     return envKey;
   }
 

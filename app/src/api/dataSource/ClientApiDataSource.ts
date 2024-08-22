@@ -8,11 +8,6 @@ import {
 } from '@calimero-is-near/calimero-p2p-sdk';
 import { getRpcPath } from '../../utils/env';
 import {
-  getAppEndpointKey,
-  getContextId,
-  getExecutorPublicKey,
-} from '../../utils/storage';
-import {
   ClientApi,
   ClientMethod,
   GetCountRequest,
@@ -22,13 +17,18 @@ import {
   ResetRequest,
   ResetResponse,
 } from '../clientApi';
+import { getContextId } from '../../utils/node';
+import {
+  getStorageAppEndpointKey,
+  getStorageExecutorPublicKey,
+} from '../../utils/storage';
 
 export function getJsonRpcClient() {
-  return new JsonRpcClient(getAppEndpointKey() ?? '', getRpcPath());
+  return new JsonRpcClient(getStorageAppEndpointKey() ?? '', getRpcPath());
 }
 
 export function getWsSubscriptionsClient() {
-  return new WsSubscriptionsClient(getAppEndpointKey() ?? '', '/ws');
+  return new WsSubscriptionsClient(getStorageAppEndpointKey() ?? '', '/ws');
 }
 
 export class ClientApiDataSource implements ClientApi {
@@ -40,7 +40,7 @@ export class ClientApiDataSource implements ClientApi {
       throw new Error('Failed to create auth headers');
     }
 
-    const publicKey = getExecutorPublicKey();
+    const publicKey = getStorageExecutorPublicKey();
     if (publicKey === null) {
       return {
         error: { message: 'Failed to get executor public key', code: 500 },
@@ -81,7 +81,7 @@ export class ClientApiDataSource implements ClientApi {
       throw new Error('Failed to create auth headers');
     }
 
-    const publicKey = getExecutorPublicKey();
+    const publicKey = getStorageExecutorPublicKey();
     if (publicKey === null) {
       return {
         error: { message: 'Failed to get executor public key', code: 500 },
@@ -118,7 +118,7 @@ export class ClientApiDataSource implements ClientApi {
       throw new Error('Failed to create auth headers');
     }
 
-    const publicKey = getExecutorPublicKey();
+    const publicKey = getStorageExecutorPublicKey();
     if (publicKey === null) {
       return {
         error: { message: 'Failed to get executor public key', code: 500 },
