@@ -3,6 +3,7 @@ import bs58 from 'bs58';
 
 export const APP_URL = 'app-url';
 export const CONTEXT_IDENTITY = 'context-identity';
+export const CONTEXT_ID = 'context-id';
 
 export const getAppEndpointKey = (): string | null => {
   try {
@@ -49,4 +50,18 @@ export const setAppEndpointKey = (url: string) => {
 
 export const clearAppEndpoint = () => {
   localStorage.removeItem(APP_URL);
+};
+
+export const getContextId = (): string | null => {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    const storageContextId = localStorage.getItem(CONTEXT_ID);
+    if (storageContextId) {
+      return JSON.parse(storageContextId);
+    }
+  }
+  return null;
+};
+
+export const setContextId = (contextId: string) => {
+  localStorage.setItem(CONTEXT_ID, JSON.stringify(contextId));
 };
