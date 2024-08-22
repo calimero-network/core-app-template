@@ -53,12 +53,13 @@ export const clearAppEndpoint = () => {
 };
 
 export const getContextId = (): string | null => {
-  const storageContextId = localStorage.getItem(CONTEXT_ID);
-  if (storageContextId) {
-    return JSON.parse(storageContextId);
-  } else {
-    return null;
+  if (typeof window !== 'undefined' && window.localStorage) {
+    const storageContextId = localStorage.getItem(CONTEXT_ID);
+    if (storageContextId) {
+      return JSON.parse(storageContextId);
+    }
   }
+  return null;
 };
 
 export const setContextId = (contextId: string) => {
