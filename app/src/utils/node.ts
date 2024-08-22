@@ -1,4 +1,4 @@
-import { getAppEndpointKey, setAppEndpointKey } from './storage';
+import { getAppEndpointKey, getContextId, setAppEndpointKey, setContextId } from './storage';
 
 export function getNodeUrl(): string {
   let storageKey = getAppEndpointKey();
@@ -10,6 +10,18 @@ export function getNodeUrl(): string {
   }
 
   return storageKey ?? '';
+}
+
+export function getStorageContextId(): string {
+  let storageContextId = getContextId();
+
+  if (!storageContextId) {
+    let envKey: string = import.meta.env['VITE_NODE_CONTEXT_ID'] ?? '';
+    setContextId(envKey);
+    return envKey;
+  }
+
+  return storageContextId ?? '';
 }
 
 export function getNearEnvironment(): string {
