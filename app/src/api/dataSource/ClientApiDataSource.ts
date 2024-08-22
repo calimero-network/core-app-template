@@ -6,8 +6,12 @@ import {
   WsSubscriptionsClient,
   createAuthHeader,
 } from '@calimero-is-near/calimero-p2p-sdk';
-import { getContextId, getRpcPath } from '../../utils/env';
-import { getAppEndpointKey, getExecutorPublicKey } from '../../utils/storage';
+import { getRpcPath } from '../../utils/env';
+import {
+  getAppEndpointKey,
+  getContextId,
+  getExecutorPublicKey,
+} from '../../utils/storage';
 import {
   ClientApi,
   ClientMethod,
