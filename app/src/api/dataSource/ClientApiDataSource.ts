@@ -7,7 +7,11 @@ import {
   createAuthHeader,
 } from '@calimero-is-near/calimero-p2p-sdk';
 import { getRpcPath } from '../../utils/env';
-import { getAppEndpointKey, getContextId, getExecutorPublicKey } from '../../utils/storage';
+import {
+  getAppEndpointKey,
+  getContextId,
+  getExecutorPublicKey,
+} from '../../utils/storage';
 import {
   ClientApi,
   ClientMethod,
