@@ -96,7 +96,7 @@ export interface JsonWebToken {
   exp: number;
   sub: string;
   executor_public_key: string;
-};
+}
 
 export const getJWTObject = (): JsonWebToken | null => {
   const token = getAccessToken();

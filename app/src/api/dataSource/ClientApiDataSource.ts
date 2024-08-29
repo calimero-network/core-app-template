@@ -82,12 +82,14 @@ export class ClientApiDataSource implements ClientApi {
   ): ApiResponse<IncreaseCountResponse> {
     const jwtObject: JsonWebToken | null = getJWTObject();
     const headers: AxiosHeader | null = createJwtHeader();
-    
+
     if (headers === null) {
       throw new Error('Failed to create auth headers');
     }
 
-    const publicKey = getExecutorPkByteArray(jwtObject?.executor_public_key ?? '');
+    const publicKey = getExecutorPkByteArray(
+      jwtObject?.executor_public_key ?? '',
+    );
     if (!publicKey) {
       return {
         error: { message: 'Failed to get executor public key', code: 500 },
@@ -120,12 +122,14 @@ export class ClientApiDataSource implements ClientApi {
   async reset(params: ResetRequest): ApiResponse<ResetResponse> {
     const jwtObject: JsonWebToken | null = getJWTObject();
     const headers: AxiosHeader | null = createJwtHeader();
-    
+
     if (headers === null) {
       throw new Error('Failed to create auth headers');
     }
 
-    const publicKey = getExecutorPkByteArray(jwtObject?.executor_public_key ?? '');
+    const publicKey = getExecutorPkByteArray(
+      jwtObject?.executor_public_key ?? '',
+    );
     if (!publicKey) {
       return {
         error: { message: 'Failed to get executor public key', code: 500 },

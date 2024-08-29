@@ -1,4 +1,4 @@
-import { getJWT } from "./storage";
+import { getJWT } from './storage';
 
 export interface AxiosHeader {
   [key: string]: string;
