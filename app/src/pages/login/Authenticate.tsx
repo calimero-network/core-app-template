@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { clearAppEndpoint, clearApplicationId } from '../../utils/storage';
 import { getNodeUrl, getStorageApplicationId } from '../../utils/node';
 import { styled } from 'styled-components';
+import ContentWrapper from '../../components/login/ContentWrapper';
 
 const Wrapper = styled.div`
   display: flex;
@@ -17,7 +18,6 @@ const Wrapper = styled.div`
     color: white;
     padding: 1rem;
     cursor: pointer;
-    position: absolute;
   }
 
   .flex-wrapper {
@@ -25,6 +25,7 @@ const Wrapper = styled.div`
     height: 100%;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
   }
 
@@ -60,12 +61,8 @@ export default function Authenticate() {
   }
 
   return (
-    <>
+    <ContentWrapper>
       <Wrapper>
-        <div className="back-button" onClick={onSetupClick}>
-          Return to setup
-        </div>
-
         <div className="flex-wrapper">
           <div className="card">
             <div className="title-wrapper">
@@ -77,8 +74,11 @@ export default function Authenticate() {
               sucessRedirect={() => navigate('/home')}
             />
           </div>
+          <div className="back-button" onClick={onSetupClick}>
+            Return to setup
+          </div>
         </div>
       </Wrapper>
-    </>
+    </ContentWrapper>
   );
 }
