@@ -32,9 +32,9 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.75rem; 
+    gap: 0.75rem;
     padding-left: 3.5rem;
-   padding-right: 3.5rem; 
+    padding-right: 3.5rem;
   }
 
   .title {
@@ -44,7 +44,7 @@ const Wrapper = styled.div`
   }
 
   .card {
-    background-color: #1C1C1C;
+    background-color: #1c1c1c;
     padding: 2rem;
     border-radius: 0.5rem;
   }
@@ -56,33 +56,28 @@ export default function Authenticate() {
   function onSetupClick() {
     clearAppEndpoint();
     clearApplicationId();
-    navigate('/setup');
+    navigate('/');
   }
 
   return (
     <>
       <Wrapper>
-        <div
-          className="back-button"
-          onClick={onSetupClick}
-        >
+        <div className="back-button" onClick={onSetupClick}>
           Return to setup
         </div>
 
         <div className="flex-wrapper">
-            <div className="card">
-              <div className="title-wrapper">
-                <div className="title">
-                  Only Peers
-                </div>
-              </div>
-              <ClientLogin
-                getNodeUrl={getNodeUrl}
-                getApplicationId={getStorageApplicationId}
-                sucessRedirect={() => navigate('/home')}
-              />
+          <div className="card">
+            <div className="title-wrapper">
+              <div className="title">Only Peers</div>
             </div>
+            <ClientLogin
+              getNodeUrl={getNodeUrl}
+              getApplicationId={getStorageApplicationId}
+              sucessRedirect={() => navigate('/home')}
+            />
           </div>
+        </div>
       </Wrapper>
     </>
   );
