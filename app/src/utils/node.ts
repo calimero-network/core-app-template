@@ -40,7 +40,7 @@ export function getStorageApplicationId(): string {
   let storageApplicationId = getApplicationId();
 
   if (!storageApplicationId) {
-    let envKey: string = process.env['NEXT_PUBLIC_APPLICATION_ID'] ?? '';
+    let envKey: string = process.env['VITE_APPLICATION_ID'] ?? '';
     setStorageApplicationId(envKey);
     return envKey;
   }
