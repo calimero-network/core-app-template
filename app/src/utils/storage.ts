@@ -4,6 +4,7 @@ import bs58 from 'bs58';
 export const APP_URL = 'app-url';
 export const CONTEXT_IDENTITY = 'context-identity';
 export const CONTEXT_ID = 'context-id';
+export const APPLICATION_ID = 'application-id';
 
 export const getStorageAppEndpointKey = (): string | null => {
   try {
@@ -64,4 +65,26 @@ export const getStorageContextId = (): string | null => {
 
 export const setStorageContextId = (contextId: string) => {
   localStorage.setItem(CONTEXT_ID, JSON.stringify(contextId));
+};
+
+export const clearAppEndpoint = () => {
+  localStorage.removeItem(APP_URL);
+};
+
+export const clearApplicationId = () => {
+  localStorage.removeItem(APPLICATION_ID);
+};
+
+export const getApplicationId = (): string | null => {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    const storageApplicationId = localStorage.getItem(APPLICATION_ID);
+    if (storageApplicationId) {
+      return JSON.parse(storageApplicationId);
+    }
+  }
+  return null;
+};
+
+export const setStorageApplicationId = (applicationId: string) => {
+  localStorage.setItem(APPLICATION_ID, JSON.stringify(applicationId));
 };

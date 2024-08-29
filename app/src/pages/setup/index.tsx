@@ -1,12 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getContextId, getNodeUrl } from '../../utils/node';
-import {
-  setStorageAppEndpointKey,
-  setStorageContextId,
-} from '../../utils/storage';
-import ContentWrapper from '../../components/login/ContentWrapper';
 import { SetupModal } from '@calimero-is-near/calimero-p2p-sdk';
+import ContentWrapper from '../../components/login/ContentWrapper';
+import { getNodeUrl, getStorageApplicationId } from '../../utils/node';
+import { setStorageAppEndpointKey, setStorageApplicationId } from '../../utils/storage';
 
 export default function SetupPage() {
   const navigate = useNavigate();
@@ -17,8 +14,8 @@ export default function SetupPage() {
         successRoute={() => navigate('/auth')}
         getNodeUrl={getNodeUrl}
         setNodeUrl={setStorageAppEndpointKey}
-        setContextId={setStorageContextId}
-        getContextId={getContextId}
+        setApplicationId={setStorageApplicationId}
+        getApplicationId={getStorageApplicationId}
       />
     </ContentWrapper>
   );
