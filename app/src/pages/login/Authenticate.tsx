@@ -3,6 +3,52 @@ import { ClientLogin } from '@calimero-is-near/calimero-p2p-sdk';
 import { useNavigate } from 'react-router-dom';
 import { clearAppEndpoint, clearApplicationId } from '../../utils/storage';
 import { getNodeUrl, getStorageApplicationId } from '../../utils/node';
+import { styled } from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background-color: #111111;
+  position: relative;
+
+  .back-button {
+    height: fit-content;
+    color: white;
+    padding: 1rem;
+    cursor: pointer;
+    position: absolute;
+  }
+
+  .flex-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem; 
+    padding-left: 3.5rem;
+   padding-right: 3.5rem; 
+  }
+
+  .title {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .card {
+    background-color: #1C1C1C;
+    padding: 2rem;
+    border-radius: 0.5rem;
+  }
+`;
 
 export default function Authenticate() {
   const navigate = useNavigate();
@@ -15,19 +61,18 @@ export default function Authenticate() {
 
   return (
     <>
-      <div className="flex w-full h-screen bg-[#111111] relative">
+      <Wrapper>
         <div
-          className="h-fit text-white p-4 cursor-pointer absolute"
+          className="back-button"
           onClick={onSetupClick}
         >
           Return to setup
         </div>
 
-        <div className="w-full h-full flex justify-items-center justify-center">
-          <div className="flex flex-col justify-center items-center">
-            <div className="items-center bg-[#1C1C1C] p-8 gap-y-4 rounded-lg">
-              <div className="flex justify-center items-center gap-3 px-14">
-                <div className="text-white text-4xl font-semibold">
+        <div className="flex-wrapper">
+            <div className="card">
+              <div className="title-wrapper">
+                <div className="title">
                   Only Peers
                 </div>
               </div>
@@ -38,8 +83,7 @@ export default function Authenticate() {
               />
             </div>
           </div>
-        </div>
-      </div>
+      </Wrapper>
     </>
   );
 }
