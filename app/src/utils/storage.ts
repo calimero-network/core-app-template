@@ -1,3 +1,4 @@
+import { getAccessToken } from '@calimero-is-near/calimero-p2p-sdk';
 import { marshalPublicKey } from '@libp2p/crypto/keys';
 import bs58 from 'bs58';
 
@@ -87,4 +88,45 @@ export const getApplicationId = (): string | null => {
 
 export const setStorageApplicationId = (applicationId: string) => {
   localStorage.setItem(APPLICATION_ID, JSON.stringify(applicationId));
+};
+
+export interface JsonWebToken {
+  context_id: string;
+  token_type: string;
+  exp: number;
+  sub: string;
+  executor_public_key: string;
+}
+
+export const getJWTObject = (): JsonWebToken | null => {
+  const token = getAccessToken();
+  if (!token) return null;
+  const parts = token.split('.');
+  if (parts.length !== 3) {
+    throw new Error('Invalid JWT token');
+  }
+  const payload = JSON.parse(atob(parts[1]));
+  return payload;
+};
+
+export const getJWT = (): string | null => {
+  return getAccessToken();
+};
+
+export const getExecutorPkByteArray = (
+  executorPublicKey: string,
+): Uint8Array | null => {
+  try {
+    const decodedPk = bs58.decode(executorPublicKey);
+    const publicKey = marshalPublicKey(
+      { bytes: decodedPk.slice(0, 32) },
+      'ed25519',
+    );
+    if (publicKey) {
+      return publicKey;
+    }
+    return null;
+  } catch (e) {
+    return null;
+  }
 };
