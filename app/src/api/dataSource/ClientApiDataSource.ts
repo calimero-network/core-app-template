@@ -1,12 +1,9 @@
 import {
   ApiResponse,
-  Header,
   JsonRpcClient,
   RequestConfig,
   WsSubscriptionsClient,
-  createAuthHeader,
 } from '@calimero-is-near/calimero-p2p-sdk';
-import { getRpcPath } from '../../utils/env';
 import {
   ClientApi,
   ClientMethod,
@@ -19,12 +16,19 @@ import {
 } from '../clientApi';
 import { getContextId } from '../../utils/node';
 import {
+  getExecutorPkByteArray,
+  getJWTObject,
   getStorageAppEndpointKey,
-  getStorageExecutorPublicKey,
+  JsonWebToken,
 } from '../../utils/storage';
+import { AxiosHeader, createJwtHeader } from '../../utils/jwtHeaders';
 
 export function getJsonRpcClient() {
-  return new JsonRpcClient(getStorageAppEndpointKey() ?? '', getRpcPath());
+  const jwt: JsonWebToken | null = getJWTObject();
+  return new JsonRpcClient(
+    getStorageAppEndpointKey() ?? '',
+    jwt?.context_id ?? '',
+  );
 }
 
 export function getWsSubscriptionsClient() {
@@ -33,22 +37,24 @@ export function getWsSubscriptionsClient() {
 
 export class ClientApiDataSource implements ClientApi {
   async getCount(params: GetCountRequest): ApiResponse<GetCountResponse> {
-    const authHeaders: Header | null = await createAuthHeader(
-      JSON.stringify(params),
-    );
-    if (authHeaders === null) {
+    const jwtObject: JsonWebToken | null = getJWTObject();
+    const headers: AxiosHeader | null = createJwtHeader();
+
+    if (headers === null) {
       throw new Error('Failed to create auth headers');
     }
 
-    const publicKey = getStorageExecutorPublicKey();
-    if (publicKey === null) {
+    const publicKey = getExecutorPkByteArray(
+      jwtObject?.executor_public_key ?? '',
+    );
+    if (!publicKey) {
       return {
         error: { message: 'Failed to get executor public key', code: 500 },
       };
     }
 
     const config: RequestConfig = {
-      headers: authHeaders,
+      headers: headers,
       timeout: 10000,
     };
 
@@ -74,22 +80,25 @@ export class ClientApiDataSource implements ClientApi {
   async increaseCount(
     params: IncreaseCountRequest,
   ): ApiResponse<IncreaseCountResponse> {
-    const authHeaders: Header | null = await createAuthHeader(
-      JSON.stringify(params),
-    );
-    if (authHeaders === null) {
+    const jwtObject: JsonWebToken | null = getJWTObject();
+    const headers: AxiosHeader | null = createJwtHeader();
+
+    if (headers === null) {
       throw new Error('Failed to create auth headers');
     }
 
-    const publicKey = getStorageExecutorPublicKey();
-    if (publicKey === null) {
+    const publicKey = getExecutorPkByteArray(
+      jwtObject?.executor_public_key ?? '',
+    );
+    if (!publicKey) {
       return {
         error: { message: 'Failed to get executor public key', code: 500 },
       };
     }
 
     const config: RequestConfig = {
-      headers: authHeaders,
+      headers: headers,
+      timeout: 10000,
     };
 
     const response = await getJsonRpcClient().mutate<
@@ -111,22 +120,25 @@ export class ClientApiDataSource implements ClientApi {
   }
 
   async reset(params: ResetRequest): ApiResponse<ResetResponse> {
-    const authHeaders: Header | null = await createAuthHeader(
-      JSON.stringify(params),
-    );
-    if (authHeaders === null) {
+    const jwtObject: JsonWebToken | null = getJWTObject();
+    const headers: AxiosHeader | null = createJwtHeader();
+
+    if (headers === null) {
       throw new Error('Failed to create auth headers');
     }
 
-    const publicKey = getStorageExecutorPublicKey();
-    if (publicKey === null) {
+    const publicKey = getExecutorPkByteArray(
+      jwtObject?.executor_public_key ?? '',
+    );
+    if (!publicKey) {
       return {
         error: { message: 'Failed to get executor public key', code: 500 },
       };
     }
 
     const config: RequestConfig = {
-      headers: authHeaders,
+      headers: headers,
+      timeout: 10000,
     };
 
     const response = await getJsonRpcClient().mutate<

@@ -1,8 +1,10 @@
 import { getEnvContextId } from './env';
 import {
+  getApplicationId,
   getStorageAppEndpointKey,
   getStorageContextId,
   setStorageAppEndpointKey,
+  setStorageApplicationId,
   setStorageContextId,
 } from './storage';
 
@@ -32,4 +34,16 @@ export function getContextId(): string {
 
 export function getNearEnvironment(): string {
   return import.meta.env['VITE_NEAR_ENVIRONMENT'] ?? 'testnet';
+}
+
+export function getStorageApplicationId(): string {
+  let storageApplicationId = getApplicationId();
+
+  if (!storageApplicationId) {
+    let envKey: string = import.meta.env['VITE_APPLICATION_ID'] ?? '';
+    setStorageApplicationId(envKey);
+    return envKey;
+  }
+
+  return storageApplicationId ?? '';
 }
