@@ -26,10 +26,7 @@ import { getRpcPath } from '../../utils/env';
 
 export function getJsonRpcClient() {
   const jwt: JsonWebToken | null = getJWTObject();
-  return new JsonRpcClient(
-    getStorageAppEndpointKey() ?? '',
-    getRpcPath(),
-  );
+  return new JsonRpcClient(getStorageAppEndpointKey() ?? '', getRpcPath());
 }
 
 export function getWsSubscriptionsClient() {
@@ -64,7 +61,7 @@ export class ClientApiDataSource implements ClientApi {
       GetCountResponse
     >(
       {
-        contextId: getContextId(),
+        contextId: jwtObject?.context_id ?? getContextId(),
         method: ClientMethod.GET_COUNT,
         argsJson: params,
         executorPublicKey: Array.from(publicKey),
@@ -107,7 +104,7 @@ export class ClientApiDataSource implements ClientApi {
       IncreaseCountResponse
     >(
       {
-        contextId: getContextId(),
+        contextId: jwtObject?.context_id ?? getContextId(),
         method: ClientMethod.INCREASE_COUNT,
         argsJson: params,
         executorPublicKey: Array.from(publicKey),
@@ -147,7 +144,7 @@ export class ClientApiDataSource implements ClientApi {
       ResetResponse
     >(
       {
-        contextId: getContextId(),
+        contextId: jwtObject?.context_id ?? getContextId(),
         method: ClientMethod.RESET,
         argsJson: params,
         executorPublicKey: Array.from(publicKey),
