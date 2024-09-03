@@ -22,12 +22,13 @@ import {
   JsonWebToken,
 } from '../../utils/storage';
 import { AxiosHeader, createJwtHeader } from '../../utils/jwtHeaders';
+import { getRpcPath } from '../../utils/env';
 
 export function getJsonRpcClient() {
   const jwt: JsonWebToken | null = getJWTObject();
   return new JsonRpcClient(
     getStorageAppEndpointKey() ?? '',
-    jwt?.context_id ?? '',
+    getRpcPath(),
   );
 }
 
