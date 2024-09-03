@@ -1,6 +1,7 @@
 import { getEnvContextId } from './env';
 import {
   getApplicationId,
+  getJWTObject,
   getStorageAppEndpointKey,
   getStorageContextId,
   setStorageAppEndpointKey,
@@ -24,7 +25,8 @@ export function getContextId(): string {
   let storageContextId = getStorageContextId();
 
   if (!storageContextId) {
-    let envKey: string = getEnvContextId();
+    let jwtToken = getJWTObject();
+    let envKey: string = jwtToken?.context_id ?? '';
     setStorageContextId(envKey);
     return envKey;
   }
