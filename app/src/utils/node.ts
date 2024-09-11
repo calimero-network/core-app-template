@@ -1,4 +1,3 @@
-import { getEnvContextId } from './env';
 import {
   getApplicationId,
   getJWTObject,
