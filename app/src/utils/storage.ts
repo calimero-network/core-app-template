@@ -1,6 +1,4 @@
 import { getAccessToken } from '@calimero-is-near/calimero-p2p-sdk';
-import { marshalPublicKey } from '@libp2p/crypto/keys';
-import bs58 from 'bs58';
 
 export const APP_URL = 'app-url';
 export const CONTEXT_IDENTITY = 'context-identity';
@@ -24,21 +22,13 @@ export const getStorageAppEndpointKey = (): string | null => {
   }
 };
 
-export const getStorageExecutorPublicKey = (): Uint8Array | null => {
+export const getStorageExecutorPublicKey = (): String | null => {
   try {
     if (typeof window !== 'undefined' && window.localStorage) {
       let contextIdentity: string = JSON.parse(
         localStorage.getItem(CONTEXT_IDENTITY) ?? '',
       );
-      const decodedPk = bs58.decode(contextIdentity);
-
-      const publicKey = marshalPublicKey(
-        { bytes: decodedPk.slice(0, 32) },
-        'ed25519',
-      );
-      if (publicKey) {
-        return publicKey;
-      }
+      return contextIdentity;
     }
     return null;
   } catch (e) {
@@ -111,22 +101,4 @@ export const getJWTObject = (): JsonWebToken | null => {
 
 export const getJWT = (): string | null => {
   return getAccessToken();
-};
-
-export const getExecutorPkByteArray = (
-  executorPublicKey: string,
-): Uint8Array | null => {
-  try {
-    const decodedPk = bs58.decode(executorPublicKey);
-    const publicKey = marshalPublicKey(
-      { bytes: decodedPk.slice(0, 32) },
-      'ed25519',
-    );
-    if (publicKey) {
-      return publicKey;
-    }
-    return null;
-  } catch (e) {
-    return null;
-  }
 };
