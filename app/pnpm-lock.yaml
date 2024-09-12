@@ -8,8 +8,8 @@ importers:
   .:
     dependencies:
       '@calimero-is-near/calimero-p2p-sdk':
-        specifier: 0.0.35
-        version: 0.0.35(@near-wallet-selector/modal-ui@8.9.8(near-api-js@3.0.4))(@types/react@18.3.3)(bufferutil@4.0.8)(react-i18next@13.5.0(i18next@22.5.1)(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(rollup@4.18.0)(typescript@4.9.5)
+        specifier: 0.0.37
+        version: 0.0.37(@near-wallet-selector/modal-ui@8.9.8(near-api-js@3.0.4))(@types/react@18.3.3)(bufferutil@4.0.8)(react-i18next@13.5.0(i18next@22.5.1)(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(rollup@4.18.0)(typescript@4.9.5)
       '@near-wallet-selector/modal-ui':
         specifier: ^8.9.8
         version: 8.9.8(near-api-js@3.0.4)
@@ -44,9 +44,6 @@ importers:
       '@eslint/js':
         specifier: ^9.4.0
         version: 9.4.0
-      '@libp2p/crypto':
-        specifier: ^4.0.3
-        version: 4.1.3
       '@types/eslint__js':
         specifier: ^8.42.3
         version: 8.42.3
@@ -68,9 +65,6 @@ importers:
       '@vitejs/plugin-react':
         specifier: ^4.2.1
         version: 4.3.0(vite@5.2.12(@types/node@16.18.98)(terser@5.31.0))
-      bs58:
-        specifier: ^5.0.0
-        version: 5.0.0
       concurrently:
         specifier: ^7.3.0
         version: 7.6.0
@@ -1458,10 +1452,10 @@ packages:
       }
     engines: { node: '>=6.9.0' }
 
-  '@calimero-is-near/calimero-p2p-sdk@0.0.35':
+  '@calimero-is-near/calimero-p2p-sdk@0.0.37':
     resolution:
       {
-        integrity: sha512-JvyN0M2mQtUGoOTTLDaqDAIzTra8xPp9wvfr7WxoVa3LyQYR4l+67hnVY+ecrFSWdrBxm/CYLVgGBCdw2X7YAg==,
+        integrity: sha512-Yl225A35FxUx1gCgmDQfR+kuXdUw0ugzPU/pL9ZWZ1fMy/FxiWoJlcrYlAiWeVPbDPn+Tna5BuRIbfBINoOTxw==,
       }
     peerDependencies:
       '@near-wallet-selector/modal-ui': ^8.9.7
@@ -2527,6 +2521,13 @@ packages:
       }
     engines: { node: '>= 16' }
 
+  '@noble/hashes@1.5.0':
+    resolution:
+      {
+        integrity: sha512-1j6kQFb7QRru7eKN3ZDvRcP13rugwdxZqCjbiAVZfIJwgj2A65UmT4TgARXGlXgnRkORLTDTrO19ZErt7+QXgA==,
+      }
+    engines: { node: ^14.21.3 || >=16 }
+
   '@nodelib/fs.scandir@2.1.5':
     resolution:
       {
@@ -3039,10 +3040,10 @@ packages:
       }
     engines: { node: '>=16' }
 
-  '@scure/base@1.1.6':
+  '@scure/base@1.1.8':
     resolution:
       {
-        integrity: sha512-ok9AWwhcgYuGG3Zfhyqg+zwl+Wn5uE+dwC0NV/2qQkx4dABbb/bx96vWu8NSj+BNjjSjno+JRYRjle1jV08k3g==,
+        integrity: sha512-6CyAclxj3Nb0XT7GHK6K4zK6k2xJm6E4Ft0Ohjt4WgegiFUHEtFb2CGzmPmGBwoIhrLsqNLYfLr04Y1GePrzZg==,
       }
 
   '@scure/bip32@1.3.2':
@@ -3067,6 +3068,12 @@ packages:
     resolution:
       {
         integrity: sha512-disdg7gHuTDZtY+ZdkmLpPCk7fxZSu3gBiEGuoC1XYxv9cGx3Z6cpTggCgW6odSOOIXCiDjuGejW+aJKCY/pIQ==,
+      }
+
+  '@scure/bip39@1.4.0':
+    resolution:
+      {
+        integrity: sha512-BEEm6p8IueV/ZTfQLp/0vhw4NPnT9oWf5+28nvmeUICjP99f4vr2d+qc7AVGDDtwRep6ifR43Yed9ERVmiITzw==,
       }
 
   '@scure/starknet@1.0.0':
@@ -3881,7 +3888,6 @@ packages:
       {
         integrity: sha512-EvUWjaZBQu2yKnH5/5F2qzbuiIuUN9ZgrNKgvXkw5z1Dq5RJCks0S9/MFlKH/ZSGqXnLl7uAzBXtoX4sMgbCMA==,
       }
-    deprecated: Reliability and performance greatly improved - please see https://github.com/WalletConnect/walletconnect-monorepo/releases
 
   '@walletconnect/time@1.0.2':
     resolution:
@@ -10365,10 +10371,10 @@ packages:
       typescript:
         optional: true
 
-  viem@2.20.1:
+  viem@2.21.6:
     resolution:
       {
-        integrity: sha512-a/BSe25TSfkc423GTSKYl1O0ON2J5huoQeOLkylHT1WS8wh3JFqb8nfAq7vg+aZ+W06BCTn36bbi47yp4D92Cg==,
+        integrity: sha512-YX48IVl6nZ4FRsY4ypv2RrxtQVWysIY146/lBW53tma8u32h8EsiA7vecw9ZbrueNUy/asHR4Egu68Z6FOvDzQ==,
       }
     peerDependencies:
       typescript: '>=5.0.4'
@@ -11909,7 +11915,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
 
-  '@calimero-is-near/calimero-p2p-sdk@0.0.35(@near-wallet-selector/modal-ui@8.9.8(near-api-js@3.0.4))(@types/react@18.3.3)(bufferutil@4.0.8)(react-i18next@13.5.0(i18next@22.5.1)(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(rollup@4.18.0)(typescript@4.9.5)':
+  '@calimero-is-near/calimero-p2p-sdk@0.0.37(@near-wallet-selector/modal-ui@8.9.8(near-api-js@3.0.4))(@types/react@18.3.3)(bufferutil@4.0.8)(react-i18next@13.5.0(i18next@22.5.1)(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(rollup@4.18.0)(typescript@4.9.5)':
     dependencies:
       '@libp2p/crypto': 4.1.3
       '@libp2p/interface': 1.4.1
@@ -12449,7 +12455,7 @@ snapshots:
     dependencies:
       '@libp2p/interface': 1.4.1
       '@noble/curves': 1.4.0
-      '@noble/hashes': 1.4.0
+      '@noble/hashes': 1.5.0
       asn1js: 3.0.5
       multiformats: 13.1.1
       protons-runtime: 5.4.0
@@ -12575,8 +12581,8 @@ snapshots:
       react-copy-to-clipboard: 5.1.0(react@18.3.1)
       react-dom: 18.3.1(react@18.3.1)
       react-jazzicon: 1.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      viem: 2.20.1(bufferutil@4.0.8)(typescript@4.9.5)
-      wagmi: 1.4.12(@types/react@18.3.3)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1)(typescript@4.9.5)(viem@2.20.1(bufferutil@4.0.8)(typescript@4.9.5))
+      viem: 2.21.6(bufferutil@4.0.8)(typescript@4.9.5)
+      wagmi: 1.4.12(@types/react@18.3.3)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1)(typescript@4.9.5)(viem@2.21.6(bufferutil@4.0.8)(typescript@4.9.5))
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -12675,8 +12681,8 @@ snapshots:
     dependencies:
       '@ethereumjs/tx': 4.2.0
       '@metamask/superstruct': 3.0.0
-      '@noble/hashes': 1.4.0
-      '@scure/base': 1.1.6
+      '@noble/hashes': 1.5.0
+      '@scure/base': 1.1.8
       '@types/debug': 4.1.12
       debug: 4.3.5
       pony-cause: 2.1.11
@@ -12940,6 +12946,8 @@ snapshots:
   '@noble/hashes@1.3.3': {}
 
   '@noble/hashes@1.4.0': {}
+
+  '@noble/hashes@1.5.0': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -13413,29 +13421,34 @@ snapshots:
 
   '@safe-global/safe-gateway-typescript-sdk@3.21.2': {}
 
-  '@scure/base@1.1.6': {}
+  '@scure/base@1.1.8': {}
 
   '@scure/bip32@1.3.2':
     dependencies:
       '@noble/curves': 1.2.0
       '@noble/hashes': 1.3.3
-      '@scure/base': 1.1.6
+      '@scure/base': 1.1.8
 
   '@scure/bip32@1.4.0':
     dependencies:
       '@noble/curves': 1.4.0
       '@noble/hashes': 1.4.0
-      '@scure/base': 1.1.6
+      '@scure/base': 1.1.8
 
   '@scure/bip39@1.2.1':
     dependencies:
       '@noble/hashes': 1.3.3
-      '@scure/base': 1.1.6
+      '@scure/base': 1.1.8
 
   '@scure/bip39@1.3.0':
     dependencies:
       '@noble/hashes': 1.4.0
-      '@scure/base': 1.1.6
+      '@scure/base': 1.1.8
+
+  '@scure/bip39@1.4.0':
+    dependencies:
+      '@noble/hashes': 1.5.0
+      '@scure/base': 1.1.8
 
   '@scure/starknet@1.0.0':
     dependencies:
@@ -13880,7 +13893,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@wagmi/connectors@3.1.10(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1)(typescript@4.9.5)(viem@2.20.1(bufferutil@4.0.8)(typescript@4.9.5))':
+  '@wagmi/connectors@3.1.10(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1)(typescript@4.9.5)(viem@2.21.6(bufferutil@4.0.8)(typescript@4.9.5))':
     dependencies:
       '@coinbase/wallet-sdk': 3.9.3
       '@safe-global/safe-apps-provider': 0.18.2(bufferutil@4.0.8)(typescript@4.9.5)
@@ -13891,7 +13904,7 @@ snapshots:
       '@walletconnect/utils': 2.10.2
       abitype: 0.8.7(typescript@4.9.5)
       eventemitter3: 4.0.7
-      viem: 2.20.1(bufferutil@4.0.8)(typescript@4.9.5)
+      viem: 2.21.6(bufferutil@4.0.8)(typescript@4.9.5)
     optionalDependencies:
       typescript: 4.9.5
     transitivePeerDependencies:
@@ -13917,12 +13930,12 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@wagmi/core@1.4.12(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1)(typescript@4.9.5)(viem@2.20.1(bufferutil@4.0.8)(typescript@4.9.5))':
+  '@wagmi/core@1.4.12(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1)(typescript@4.9.5)(viem@2.21.6(bufferutil@4.0.8)(typescript@4.9.5))':
     dependencies:
-      '@wagmi/connectors': 3.1.10(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1)(typescript@4.9.5)(viem@2.20.1(bufferutil@4.0.8)(typescript@4.9.5))
+      '@wagmi/connectors': 3.1.10(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1)(typescript@4.9.5)(viem@2.21.6(bufferutil@4.0.8)(typescript@4.9.5))
       abitype: 0.8.7(typescript@4.9.5)
       eventemitter3: 4.0.7
-      viem: 2.20.1(bufferutil@4.0.8)(typescript@4.9.5)
+      viem: 2.21.6(bufferutil@4.0.8)(typescript@4.9.5)
       zustand: 4.5.2(@types/react@18.3.3)(react@18.3.1)
     optionalDependencies:
       typescript: 4.9.5
@@ -18173,8 +18186,8 @@ snapshots:
   starknet@6.11.0:
     dependencies:
       '@noble/curves': 1.4.0
-      '@noble/hashes': 1.4.0
-      '@scure/base': 1.1.6
+      '@noble/hashes': 1.5.0
+      '@scure/base': 1.1.8
       '@scure/starknet': 1.0.0
       abi-wan-kanabi: 2.2.3
       fetch-cookie: 3.0.1
@@ -18635,13 +18648,13 @@ snapshots:
       - utf-8-validate
       - zod
 
-  viem@2.20.1(bufferutil@4.0.8)(typescript@4.9.5):
+  viem@2.21.6(bufferutil@4.0.8)(typescript@4.9.5):
     dependencies:
       '@adraffy/ens-normalize': 1.10.0
       '@noble/curves': 1.4.0
       '@noble/hashes': 1.4.0
       '@scure/bip32': 1.4.0
-      '@scure/bip39': 1.3.0
+      '@scure/bip39': 1.4.0
       abitype: 1.0.5(typescript@4.9.5)
       isows: 1.0.4(ws@8.17.1(bufferutil@4.0.8))
       webauthn-p256: 0.0.5
@@ -18683,16 +18696,16 @@ snapshots:
 
   void-elements@3.1.0: {}
 
-  wagmi@1.4.12(@types/react@18.3.3)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1)(typescript@4.9.5)(viem@2.20.1(bufferutil@4.0.8)(typescript@4.9.5)):
+  wagmi@1.4.12(@types/react@18.3.3)(bufferutil@4.0.8)(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1)(typescript@4.9.5)(viem@2.21.6(bufferutil@4.0.8)(typescript@4.9.5)):
     dependencies:
       '@tanstack/query-sync-storage-persister': 4.36.1
       '@tanstack/react-query': 4.36.1(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1)
       '@tanstack/react-query-persist-client': 4.36.1(@tanstack/react-query@4.36.1(react-dom@18.3.1(react@18.3.1))(react-native@0.74.2(@babel/core@7.24.6)(@babel/preset-env@7.24.7(@babel/core@7.24.6))(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1))(react@18.3.1))
-      '@wagmi/core': 1.4.12(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1)(typescript@4.9.5)(viem@2.20.1(bufferutil@4.0.8)(typescript@4.9.5))
+      '@wagmi/core': 1.4.12(@types/react@18.3.3)(bufferutil@4.0.8)(react@18.3.1)(typescript@4.9.5)(viem@2.21.6(bufferutil@4.0.8)(typescript@4.9.5))
       abitype: 0.8.7(typescript@4.9.5)
       react: 18.3.1
       use-sync-external-store: 1.2.2(react@18.3.1)
-      viem: 2.20.1(bufferutil@4.0.8)(typescript@4.9.5)
+      viem: 2.21.6(bufferutil@4.0.8)(typescript@4.9.5)
     optionalDependencies:
       typescript: 4.9.5
     transitivePeerDependencies:
@@ -18733,7 +18746,7 @@ snapshots:
   webauthn-p256@0.0.5:
     dependencies:
       '@noble/curves': 1.4.0
-      '@noble/hashes': 1.4.0
+      '@noble/hashes': 1.5.0
 
   webextension-polyfill@0.10.0: {}
 

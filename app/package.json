@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://calimero-network.github.io/core-app-template/",
   "dependencies": {
-    "@calimero-is-near/calimero-p2p-sdk": "0.0.35",
+    "@calimero-is-near/calimero-p2p-sdk": "0.0.37",
     "@near-wallet-selector/modal-ui": "^8.9.8",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
