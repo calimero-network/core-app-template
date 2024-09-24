@@ -60,7 +60,6 @@ function getConfigAndJwt() {
   return { jwtObject, config };
 }
 
-
 export class ClientApiDataSource implements ClientApi {
   async getCount(params: GetCountRequest): ApiResponse<GetCountResponse> {
     const { jwtObject, config, error } = getConfigAndJwt();
