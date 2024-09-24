@@ -1,4 +1,10 @@
 import {
+  clearAppEndpoint,
+  clearJWT,
+  clearNodeAuthorized,
+  getAccessToken,
+  getAppEndpointKey,
+  getRefreshToken,
   NodeEvent,
   ResponseData,
   SubscriptionsClient,
@@ -15,7 +21,9 @@ import {
   IncreaseCountRequest,
   IncreaseCountResponse,
 } from '../../api/clientApi';
-import { getContextId } from '../../utils/node';
+import { getContextId, getStorageApplicationId } from '../../utils/node';
+import { clearApplicationId } from '../../utils/storage';
+import { useNavigate } from 'react-router-dom';
 
 const FullPageCenter = styled.div`
   display: flex;
@@ -57,8 +65,31 @@ const StatusValue = styled.div`
   display: flex;
 `;
 
+const LogoutButton = styled.div`
+  color: black;
+  margin-top: 2rem;
+  padding: 0.25em 1em;
+  border-radius: 8px;
+  font-size: 1em;
+  background: white;
+  cursor: pointer;
+  justify-content: center;
+  display: flex;
+`;
+
 export default function HomePage() {
+  const navigate = useNavigate();
+  const url = getAppEndpointKey();
+  const applicationId = getStorageApplicationId();
+  const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken();
   const [count, setCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!url || !applicationId || !accessToken || !refreshToken) {
+      navigate('/auth');
+    }
+  }, [accessToken, applicationId, navigate, refreshToken, url]);
 
   async function increaseCounter() {
     const params: IncreaseCountRequest = {
@@ -68,6 +99,7 @@ export default function HomePage() {
       await new ClientApiDataSource().increaseCount(params);
     if (result.error) {
       console.log('Error:', result.error);
+      window.alert(`${result.error.message}`);
       return;
     }
   }
@@ -106,6 +138,14 @@ export default function HomePage() {
     observeNodeEvents();
   }, []);
 
+  const logout = () => {
+    clearNodeAuthorized();
+    clearAppEndpoint();
+    clearJWT();
+    clearApplicationId();
+    navigate('/auth');
+  };
+
   return (
     <FullPageCenter>
       <TextStyle>
@@ -115,6 +155,7 @@ export default function HomePage() {
       <StatusTitle> Current count is:</StatusTitle>
       <StatusValue> {count ?? '-'}</StatusValue>
       <Button onClick={increaseCounter}> + 1</Button>
+      <LogoutButton onClick={logout}>Logout</LogoutButton>
     </FullPageCenter>
   );
 }
