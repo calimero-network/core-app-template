@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://calimero-network.github.io/core-app-template/",
   "dependencies": {
-    "@calimero-is-near/calimero-p2p-sdk": "0.0.38",
+    "@calimero-is-near/calimero-p2p-sdk": "0.0.39",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "axios": "^1.6.7",
