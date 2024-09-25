@@ -20,6 +20,8 @@ export enum ClientMethod {
 
 export interface ClientApi {
   getCount(): ApiResponse<GetCountResponse>;
-  increaseCount(params: IncreaseCountRequest): ApiResponse<IncreaseCountResponse>;
+  increaseCount(
+    params: IncreaseCountRequest,
+  ): ApiResponse<IncreaseCountResponse>;
   reset(): ApiResponse<ResetCounterResponse>;
 }

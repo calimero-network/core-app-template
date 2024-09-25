@@ -152,7 +152,9 @@ export default function HomePage() {
     subscriptionsClient?.addCallback((data: NodeEvent) => {
       if (data.data.events && data.data.events.length > 0) {
         let currentValue = String.fromCharCode(...data.data.events[0].data);
-        let currentValueInt = isNaN(parseInt(currentValue)) ? 0 : parseInt(currentValue);
+        let currentValueInt = isNaN(parseInt(currentValue))
+          ? 0
+          : parseInt(currentValue);
         setCount(currentValueInt);
       }
     });
