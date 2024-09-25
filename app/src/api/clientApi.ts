@@ -10,7 +10,7 @@ export interface IncreaseCountRequest {
 
 export interface IncreaseCountResponse {}
 
-export interface CounterResponse {}
+export interface ResetCounterResponse {}
 
 export enum ClientMethod {
   GET_COUNT = 'get_count',
@@ -20,6 +20,6 @@ export enum ClientMethod {
 
 export interface ClientApi {
   getCount(): ApiResponse<GetCountResponse>;
-  increaseCount(params: IncreaseCountRequest): ApiResponse<CounterResponse>;
-  reset(): ApiResponse<CounterResponse>;
+  increaseCount(params: IncreaseCountRequest): ApiResponse<IncreaseCountResponse>;
+  reset(): ApiResponse<ResetCounterResponse>;
 }

@@ -1,7 +1,6 @@
 import {
   clearAppEndpoint,
   clearJWT,
-  clearNodeAuthorized,
   getAccessToken,
   getAppEndpointKey,
   getRefreshToken,
@@ -18,7 +17,8 @@ import {
 import {
   GetCountResponse,
   IncreaseCountRequest,
-  CounterResponse,
+  IncreaseCountResponse,
+  ResetCounterResponse,
 } from '../../api/clientApi';
 import { getContextId, getStorageApplicationId } from '../../utils/node';
 import { clearApplicationId } from '../../utils/storage';
@@ -106,7 +106,7 @@ export default function HomePage() {
     const params: IncreaseCountRequest = {
       count: 1,
     };
-    const result: ResponseData<CounterResponse> =
+    const result: ResponseData<IncreaseCountResponse> =
       await new ClientApiDataSource().increaseCount(params);
     if (result.error) {
       console.log('Error:', result.error);
@@ -130,7 +130,7 @@ export default function HomePage() {
   }
 
   async function resetCount() {
-    const result: ResponseData<CounterResponse> =
+    const result: ResponseData<ResetCounterResponse> =
       await new ClientApiDataSource().reset();
     if (result.error) {
       console.log('Error:', result.error);
@@ -152,7 +152,8 @@ export default function HomePage() {
     subscriptionsClient?.addCallback((data: NodeEvent) => {
       if (data.data.events && data.data.events.length > 0) {
         let currentValue = String.fromCharCode(...data.data.events[0].data);
-        setCount(parseInt(currentValue));
+        let currentValueInt = isNaN(parseInt(currentValue)) ? 0 : parseInt(currentValue);
+        setCount(currentValueInt);
       }
     });
   };
@@ -162,7 +163,6 @@ export default function HomePage() {
   }, []);
 
   const logout = () => {
-    clearNodeAuthorized();
     clearAppEndpoint();
     clearJWT();
     clearApplicationId();

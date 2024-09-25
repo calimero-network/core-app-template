@@ -11,7 +11,8 @@ import {
   ClientMethod,
   GetCountResponse,
   IncreaseCountRequest,
-  CounterResponse,
+  IncreaseCountResponse,
+  ResetCounterResponse,
 } from '../clientApi';
 import { getContextId, getNodeUrl } from '../../utils/node';
 import {
@@ -100,7 +101,7 @@ export class ClientApiDataSource implements ClientApi {
 
   async increaseCount(
     params: IncreaseCountRequest,
-  ): ApiResponse<CounterResponse> {
+  ): ApiResponse<IncreaseCountResponse> {
     const { jwtObject, config, error } = getConfigAndJwt();
     if (error) {
       return { error };
@@ -108,7 +109,7 @@ export class ClientApiDataSource implements ClientApi {
 
     const response = await getJsonRpcClient().mutate<
       IncreaseCountRequest,
-      CounterResponse
+      IncreaseCountResponse
     >(
       {
         contextId: jwtObject?.context_id ?? getContextId(),
@@ -128,13 +129,13 @@ export class ClientApiDataSource implements ClientApi {
     };
   }
 
-  async reset(): ApiResponse<CounterResponse> {
+  async reset(): ApiResponse<ResetCounterResponse> {
     const { jwtObject, config, error } = getConfigAndJwt();
     if (error) {
       return { error };
     }
 
-    const response = await getJsonRpcClient().mutate<any, CounterResponse>(
+    const response = await getJsonRpcClient().mutate<any, ResetCounterResponse>(
       {
         contextId: jwtObject?.context_id ?? getContextId(),
         method: ClientMethod.RESET,
