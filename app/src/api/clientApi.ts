@@ -1,7 +1,5 @@
 import { ApiResponse } from '@calimero-is-near/calimero-p2p-sdk';
 
-export interface GetCountRequest {}
-
 export interface GetCountResponse {
   count: number;
 }
@@ -12,9 +10,7 @@ export interface IncreaseCountRequest {
 
 export interface IncreaseCountResponse {}
 
-export interface ResetRequest {}
-
-export interface ResetResponse {}
+export interface ResetCounterResponse {}
 
 export enum ClientMethod {
   GET_COUNT = 'get_count',
@@ -23,10 +19,9 @@ export enum ClientMethod {
 }
 
 export interface ClientApi {
-  getCount(params: GetCountRequest): ApiResponse<GetCountResponse>;
+  getCount(): ApiResponse<GetCountResponse>;
   increaseCount(
     params: IncreaseCountRequest,
   ): ApiResponse<IncreaseCountResponse>;
-  reset(params: ResetRequest): ApiResponse<ResetResponse>;
-  getCount(params: GetCountRequest): ApiResponse<GetCountResponse>;
+  reset(): ApiResponse<ResetCounterResponse>;
 }

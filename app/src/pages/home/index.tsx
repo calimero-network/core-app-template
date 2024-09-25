@@ -1,4 +1,9 @@
 import {
+  clearAppEndpoint,
+  clearJWT,
+  getAccessToken,
+  getAppEndpointKey,
+  getRefreshToken,
   NodeEvent,
   ResponseData,
   SubscriptionsClient,
@@ -10,12 +15,14 @@ import {
   getWsSubscriptionsClient,
 } from '../../api/dataSource/ClientApiDataSource';
 import {
-  GetCountRequest,
   GetCountResponse,
   IncreaseCountRequest,
   IncreaseCountResponse,
+  ResetCounterResponse,
 } from '../../api/clientApi';
-import { getContextId } from '../../utils/node';
+import { getContextId, getStorageApplicationId } from '../../utils/node';
+import { clearApplicationId } from '../../utils/storage';
+import { useNavigate } from 'react-router-dom';
 
 const FullPageCenter = styled.div`
   display: flex;
@@ -44,6 +51,18 @@ const Button = styled.div`
   display: flex;
 `;
 
+const ButtonReset = styled.div`
+  color: white;
+  padding: 0.25em 1em;
+  border-radius: 8px;
+  font-size: 1em;
+  background: #ffa500;
+  cursor: pointer;
+  justify-content: center;
+  display: flex;
+  margin-top: 1rem;
+`;
+
 const StatusTitle = styled.div`
   color: white;
   justify-content: center;
@@ -57,8 +76,31 @@ const StatusValue = styled.div`
   display: flex;
 `;
 
+const LogoutButton = styled.div`
+  color: black;
+  margin-top: 2rem;
+  padding: 0.25em 1em;
+  border-radius: 8px;
+  font-size: 1em;
+  background: white;
+  cursor: pointer;
+  justify-content: center;
+  display: flex;
+`;
+
 export default function HomePage() {
+  const navigate = useNavigate();
+  const url = getAppEndpointKey();
+  const applicationId = getStorageApplicationId();
+  const accessToken = getAccessToken();
+  const refreshToken = getRefreshToken();
   const [count, setCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!url || !applicationId || !accessToken || !refreshToken) {
+      navigate('/auth');
+    }
+  }, [accessToken, applicationId, navigate, refreshToken, url]);
 
   async function increaseCounter() {
     const params: IncreaseCountRequest = {
@@ -68,21 +110,34 @@ export default function HomePage() {
       await new ClientApiDataSource().increaseCount(params);
     if (result.error) {
       console.log('Error:', result.error);
+      window.alert(`${result.error.message}`);
       return;
     }
+    await getCount();
   }
 
   async function getCount() {
-    const params: GetCountRequest = {};
     const result: ResponseData<GetCountResponse> =
-      await new ClientApiDataSource().getCount(params);
+      await new ClientApiDataSource().getCount();
     if (result.error) {
       console.log('Error:', result.error);
+      window.alert(`${result.error.message}`);
       return;
     }
-    if (result.data) {
-      setCount(result.data.count);
+    if (result.data.count || result.data.count === 0) {
+      setCount(Number(result.data.count));
     }
+  }
+
+  async function resetCount() {
+    const result: ResponseData<ResetCounterResponse> =
+      await new ClientApiDataSource().reset();
+    if (result.error) {
+      console.log('Error:', result.error);
+      window.alert(`${result.error.message}`);
+      return;
+    }
+    await getCount();
   }
 
   useEffect(() => {
@@ -97,7 +152,10 @@ export default function HomePage() {
     subscriptionsClient?.addCallback((data: NodeEvent) => {
       if (data.data.events && data.data.events.length > 0) {
         let currentValue = String.fromCharCode(...data.data.events[0].data);
-        setCount(parseInt(currentValue));
+        let currentValueInt = isNaN(parseInt(currentValue))
+          ? 0
+          : parseInt(currentValue);
+        setCount(currentValueInt);
       }
     });
   };
@@ -105,6 +163,13 @@ export default function HomePage() {
   useEffect(() => {
     observeNodeEvents();
   }, []);
+
+  const logout = () => {
+    clearAppEndpoint();
+    clearJWT();
+    clearApplicationId();
+    navigate('/auth');
+  };
 
   return (
     <FullPageCenter>
@@ -115,6 +180,8 @@ export default function HomePage() {
       <StatusTitle> Current count is:</StatusTitle>
       <StatusValue> {count ?? '-'}</StatusValue>
       <Button onClick={increaseCounter}> + 1</Button>
+      <ButtonReset onClick={resetCount}> Reset</ButtonReset>
+      <LogoutButton onClick={logout}>Logout</LogoutButton>
     </FullPageCenter>
   );
 }
