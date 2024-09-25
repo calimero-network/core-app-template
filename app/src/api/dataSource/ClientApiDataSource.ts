@@ -9,12 +9,9 @@ import {
 import {
   ClientApi,
   ClientMethod,
-  GetCountRequest,
   GetCountResponse,
   IncreaseCountRequest,
-  IncreaseCountResponse,
-  ResetRequest,
-  ResetResponse,
+  CounterResponse,
 } from '../clientApi';
 import { getContextId, getNodeUrl } from '../../utils/node';
 import {
@@ -61,33 +58,38 @@ function getConfigAndJwt() {
 }
 
 export class ClientApiDataSource implements ClientApi {
-  async getCount(params: GetCountRequest): ApiResponse<GetCountResponse> {
+  private async handleError(
+    error: RpcError,
+    params: any,
+    callbackFunction: any,
+  ) {
+    if (error && error.code) {
+      const response = await handleRpcError(error, getNodeUrl);
+      if (response.code === 403) {
+        return await callbackFunction(params);
+      }
+      return {
+        error: await handleRpcError(error, getNodeUrl),
+      };
+    }
+  }
+  async getCount(): ApiResponse<GetCountResponse> {
     const { jwtObject, config, error } = getConfigAndJwt();
     if (error) {
       return { error };
     }
 
-    const response = await getJsonRpcClient().query<
-      GetCountRequest,
-      GetCountResponse
-    >(
+    const response = await getJsonRpcClient().query<any, GetCountResponse>(
       {
         contextId: jwtObject?.context_id ?? getContextId(),
         method: ClientMethod.GET_COUNT,
-        argsJson: params,
+        argsJson: {},
         executorPublicKey: jwtObject.executor_public_key,
       },
       config,
     );
-    const rpcError: RpcError | null = response?.error ?? null;
-    if (rpcError && rpcError.code) {
-      const response = await handleRpcError(rpcError, getNodeUrl);
-      if (response.code === 403) {
-        return await this.getCount(params);
-      }
-      return {
-        error: await handleRpcError(rpcError, getNodeUrl),
-      };
+    if (response.error) {
+      return await this.handleError(response.error, {}, this.getCount);
     }
 
     return {
@@ -98,7 +100,7 @@ export class ClientApiDataSource implements ClientApi {
 
   async increaseCount(
     params: IncreaseCountRequest,
-  ): ApiResponse<IncreaseCountResponse> {
+  ): ApiResponse<CounterResponse> {
     const { jwtObject, config, error } = getConfigAndJwt();
     if (error) {
       return { error };
@@ -106,7 +108,7 @@ export class ClientApiDataSource implements ClientApi {
 
     const response = await getJsonRpcClient().mutate<
       IncreaseCountRequest,
-      IncreaseCountResponse
+      CounterResponse
     >(
       {
         contextId: jwtObject?.context_id ?? getContextId(),
@@ -116,15 +118,8 @@ export class ClientApiDataSource implements ClientApi {
       },
       config,
     );
-    const rpcError: RpcError | null = response?.error ?? null;
-    if (rpcError && rpcError.code) {
-      const response = await handleRpcError(rpcError, getNodeUrl);
-      if (response.code === 403) {
-        return await this.getCount(params);
-      }
-      return {
-        error: await handleRpcError(rpcError, getNodeUrl),
-      };
+    if (response.error) {
+      return await this.handleError(response.error, {}, this.increaseCount);
     }
 
     return {
@@ -133,33 +128,23 @@ export class ClientApiDataSource implements ClientApi {
     };
   }
 
-  async reset(params: ResetRequest): ApiResponse<ResetResponse> {
+  async reset(): ApiResponse<CounterResponse> {
     const { jwtObject, config, error } = getConfigAndJwt();
     if (error) {
       return { error };
     }
 
-    const response = await getJsonRpcClient().mutate<
-      ResetRequest,
-      ResetResponse
-    >(
+    const response = await getJsonRpcClient().mutate<any, CounterResponse>(
       {
         contextId: jwtObject?.context_id ?? getContextId(),
         method: ClientMethod.RESET,
-        argsJson: params,
+        argsJson: {},
         executorPublicKey: jwtObject.executor_public_key,
       },
       config,
     );
-    const rpcError: RpcError | null = response?.error ?? null;
-    if (rpcError && rpcError.code) {
-      const response = await handleRpcError(rpcError, getNodeUrl);
-      if (response.code === 403) {
-        return await this.getCount(params);
-      }
-      return {
-        error: await handleRpcError(rpcError, getNodeUrl),
-      };
+    if (response.error) {
+      return await this.handleError(response.error, {}, this.reset);
     }
 
     return {

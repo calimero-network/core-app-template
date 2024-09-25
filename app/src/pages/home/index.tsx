@@ -16,10 +16,9 @@ import {
   getWsSubscriptionsClient,
 } from '../../api/dataSource/ClientApiDataSource';
 import {
-  GetCountRequest,
   GetCountResponse,
   IncreaseCountRequest,
-  IncreaseCountResponse,
+  CounterResponse,
 } from '../../api/clientApi';
 import { getContextId, getStorageApplicationId } from '../../utils/node';
 import { clearApplicationId } from '../../utils/storage';
@@ -50,6 +49,18 @@ const Button = styled.div`
   cursor: pointer;
   justify-content: center;
   display: flex;
+`;
+
+const ButtonReset = styled.div`
+  color: white;
+  padding: 0.25em 1em;
+  border-radius: 8px;
+  font-size: 1em;
+  background: #FFA500;
+  cursor: pointer;
+  justify-content: center;
+  display: flex;
+  margin-top: 1rem;
 `;
 
 const StatusTitle = styled.div`
@@ -95,26 +106,38 @@ export default function HomePage() {
     const params: IncreaseCountRequest = {
       count: 1,
     };
-    const result: ResponseData<IncreaseCountResponse> =
+    const result: ResponseData<CounterResponse> =
       await new ClientApiDataSource().increaseCount(params);
     if (result.error) {
       console.log('Error:', result.error);
       window.alert(`${result.error.message}`);
       return;
     }
+    await getCount();
   }
 
   async function getCount() {
-    const params: GetCountRequest = {};
     const result: ResponseData<GetCountResponse> =
-      await new ClientApiDataSource().getCount(params);
+      await new ClientApiDataSource().getCount();
     if (result.error) {
       console.log('Error:', result.error);
+      window.alert(`${result.error.message}`);
       return;
     }
-    if (result.data) {
-      setCount(result.data.count);
+    if (result.data.count || result.data.count === 0) {
+      setCount(Number(result.data.count));
     }
+  }
+
+  async function resetCount() {
+    const result: ResponseData<CounterResponse> =
+      await new ClientApiDataSource().reset();
+    if (result.error) {
+      console.log('Error:', result.error);
+      window.alert(`${result.error.message}`);
+      return;
+    }
+    await getCount();
   }
 
   useEffect(() => {
@@ -155,6 +178,7 @@ export default function HomePage() {
       <StatusTitle> Current count is:</StatusTitle>
       <StatusValue> {count ?? '-'}</StatusValue>
       <Button onClick={increaseCounter}> + 1</Button>
+      <ButtonReset onClick={resetCount}> Reset</ButtonReset>
       <LogoutButton onClick={logout}>Logout</LogoutButton>
     </FullPageCenter>
   );
