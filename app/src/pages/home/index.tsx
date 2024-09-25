@@ -56,7 +56,7 @@ const ButtonReset = styled.div`
   padding: 0.25em 1em;
   border-radius: 8px;
   font-size: 1em;
-  background: #FFA500;
+  background: #ffa500;
   cursor: pointer;
   justify-content: center;
   display: flex;
