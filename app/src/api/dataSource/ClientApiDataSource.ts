@@ -89,7 +89,7 @@ export class ClientApiDataSource implements ClientApi {
       },
       config,
     );
-    if (response.error) {
+    if (response?.error) {
       return await this.handleError(response.error, {}, this.getCount);
     }
 
@@ -119,7 +119,7 @@ export class ClientApiDataSource implements ClientApi {
       },
       config,
     );
-    if (response.error) {
+    if (response?.error) {
       return await this.handleError(response.error, {}, this.increaseCount);
     }
 
@@ -144,7 +144,7 @@ export class ClientApiDataSource implements ClientApi {
       },
       config,
     );
-    if (response.error) {
+    if (response?.error) {
       return await this.handleError(response.error, {}, this.reset);
     }
 

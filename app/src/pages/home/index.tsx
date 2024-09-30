@@ -108,8 +108,8 @@ export default function HomePage() {
     };
     const result: ResponseData<IncreaseCountResponse> =
       await new ClientApiDataSource().increaseCount(params);
-    if (result.error) {
-      console.log('Error:', result.error);
+    if (result?.error) {
+      console.error('Error:', result.error);
       window.alert(`${result.error.message}`);
       return;
     }
@@ -119,8 +119,8 @@ export default function HomePage() {
   async function getCount() {
     const result: ResponseData<GetCountResponse> =
       await new ClientApiDataSource().getCount();
-    if (result.error) {
-      console.log('Error:', result.error);
+    if (result?.error) {
+      console.error('Error:', result.error);
       window.alert(`${result.error.message}`);
       return;
     }
@@ -132,8 +132,8 @@ export default function HomePage() {
   async function resetCount() {
     const result: ResponseData<ResetCounterResponse> =
       await new ClientApiDataSource().reset();
-    if (result.error) {
-      console.log('Error:', result.error);
+    if (result?.error) {
+      console.error('Error:', result.error);
       window.alert(`${result.error.message}`);
       return;
     }
