@@ -8,8 +8,8 @@ importers:
   .:
     dependencies:
       '@calimero-is-near/calimero-p2p-sdk':
-        specifier: 0.0.39
-        version: 0.0.39(@near-wallet-selector/modal-ui@8.9.8(near-api-js@3.0.4))
+        specifier: 0.0.41
+        version: 0.0.41(@near-wallet-selector/modal-ui@8.9.8(near-api-js@3.0.4))
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3
@@ -1370,10 +1370,10 @@ packages:
       }
     engines: { node: '>=6.9.0' }
 
-  '@calimero-is-near/calimero-p2p-sdk@0.0.39':
+  '@calimero-is-near/calimero-p2p-sdk@0.0.41':
     resolution:
       {
-        integrity: sha512-TS3EUjLCZEg4Qz+nXHl8PZBueEQPIaJJMATvDlOYvA1deaY1fqwoyskruSUY/rsjcGq8hfZK+f+VdaFk9Ef+VA==,
+        integrity: sha512-GWRTqNhzPSGnoXgAciKOL5ptNIpO6JREzyEOD6cybucbUkrwViopaSBf/0JbHKIXHgA/3lDdrZB1i0bO9ykaow==,
       }
     peerDependencies:
       '@near-wallet-selector/modal-ui': ^8.9.7
@@ -7015,7 +7015,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
 
-  '@calimero-is-near/calimero-p2p-sdk@0.0.39(@near-wallet-selector/modal-ui@8.9.8(near-api-js@3.0.4))':
+  '@calimero-is-near/calimero-p2p-sdk@0.0.41(@near-wallet-selector/modal-ui@8.9.8(near-api-js@3.0.4))':
     dependencies:
       '@near-wallet-selector/modal-ui': 8.9.8(near-api-js@3.0.4)
       axios: 1.7.2
