@@ -1,0 +1,36 @@
+name: Build and release
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "logic/**"
+jobs:
+  metadata:
+    name: Build and release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build application
+        run: |
+          ./logic/build.sh
+
+      - name: Install near CLI
+        run: |
+          curl --proto '=https' --tlsv1.2 -LsSf https://github.com/near/near-cli-rs/releases/download/v0.15.1/near-cli-rs-installer.sh | sh
+
+      - name: Release application
+        env:
+          NEAR_NETWORK: testnet
+          NEAR_CREDENTIALS_JSON: ${{ secrets.NEAR_TESTNET_CREDENTIALS_JSON }}
+          NEAR_CONTRACT_ACCOUNT_ID: "calimero-package-manager.testnet"
+        run: |
+          credentials_file="./near-credentials.json"
+          printf "$NEAR_CREDENTIALS_JSON" > "$credentials_file"
+
+          ./logic/release.sh \
+            "$NEAR_NETWORK" \
+            "$(realpath "$credentials_file")" \
+            "$NEAR_CONTRACT_ACCOUNT_ID"
