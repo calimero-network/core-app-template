@@ -14,6 +14,10 @@ chmod +x ./build.sh
 ./build.sh
 ```
 
+```bash title="Terminal"
+./release.sh ./res/logic.wasm "Test Name123" "0.0.1" "-" "-" "-" calimero-package-manager.testnet
+```
+
 ## App
 
 ```bash title="Terminal"
