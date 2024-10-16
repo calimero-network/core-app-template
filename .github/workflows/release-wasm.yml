@@ -1,4 +1,4 @@
-name: Build and release
+name: Release WASM app to registry
 on:
   push:
     branches:
