@@ -1,6 +1,6 @@
 [package]
-name = "logic"
-description = "Calimero WASM application example"
+name = "increment"
+description = "Calimero increment/decrement application"
 version = "0.1.0"
 edition = "2021"
 

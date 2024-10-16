@@ -29,11 +29,6 @@ impl AppState {
         self.count
     }
 
-    fn set_count(&mut self, count: u32) {
-        env::log(&format!("Set counter to {:?}", count));
-        self.count = count;
-    }
-
     pub fn increase_count(&mut self, count: u32) -> u32 {
         env::log(&format!("Increasing counter by {:?}", count));
         self.count = self.count + count;
