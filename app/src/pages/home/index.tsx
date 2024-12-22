@@ -7,7 +7,7 @@ import {
   NodeEvent,
   ResponseData,
   SubscriptionsClient,
-} from '@calimero-is-near/calimero-p2p-sdk';
+} from '@calimero-network/calimero-client';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {

@@ -3,7 +3,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import HomePage from './pages/home';
 import SetupPage from './pages/setup';
 import Authenticate from './pages/login/Authenticate';
-import { AccessTokenWrapper } from '@calimero-is-near/calimero-p2p-sdk';
+import { AccessTokenWrapper } from '@calimero-network/calimero-client';
 import { getNodeUrl } from './utils/node';
 
 export default function App() {

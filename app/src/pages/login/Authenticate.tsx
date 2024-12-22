@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClientLogin } from '@calimero-is-near/calimero-p2p-sdk';
+import { ClientLogin } from '@calimero-network/calimero-client';
 import { useNavigate } from 'react-router-dom';
 import { clearAppEndpoint, clearApplicationId } from '../../utils/storage';
 import { getNodeUrl, getStorageApplicationId } from '../../utils/node';

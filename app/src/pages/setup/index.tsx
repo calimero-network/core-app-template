@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SetupModal } from '@calimero-is-near/calimero-p2p-sdk';
+import { SetupModal } from '@calimero-network/calimero-client';
 import ContentWrapper from '../../components/login/ContentWrapper';
 import { getNodeUrl, getStorageApplicationId } from '../../utils/node';
 import {
