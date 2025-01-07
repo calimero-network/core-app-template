@@ -5,7 +5,7 @@ import {
   WsSubscriptionsClient,
   RpcError,
   handleRpcError,
-} from '@calimero-is-near/calimero-p2p-sdk';
+} from '@calimero-network/calimero-client';
 import {
   ClientApi,
   ClientMethod,

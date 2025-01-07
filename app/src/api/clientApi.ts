@@ -1,4 +1,4 @@
-import { ApiResponse } from '@calimero-is-near/calimero-p2p-sdk';
+import { ApiResponse } from '@calimero-network/calimero-client';
 
 export interface GetCountResponse {
   count: number;

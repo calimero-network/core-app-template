@@ -1,4 +1,4 @@
-import { getAccessToken } from '@calimero-is-near/calimero-p2p-sdk';
+import { getAccessToken } from '@calimero-network/calimero-client';
 
 export const APP_URL = 'app-url';
 export const CONTEXT_IDENTITY = 'context-identity';
