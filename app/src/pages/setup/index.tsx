@@ -1,12 +1,13 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SetupModal } from '@calimero-network/calimero-client';
-import ContentWrapper from '../../components/login/ContentWrapper';
-import { getNodeUrl, getStorageApplicationId } from '../../utils/node';
 import {
-  setStorageAppEndpointKey,
-  setStorageApplicationId,
-} from '../../utils/storage';
+  getAppEndpointKey,
+  getApplicationId,
+  setAppEndpointKey,
+  setApplicationId,
+  SetupModal,
+} from '@calimero-network/calimero-client';
+import ContentWrapper from '../../components/login/ContentWrapper';
 
 export default function SetupPage() {
   const navigate = useNavigate();
@@ -15,10 +16,10 @@ export default function SetupPage() {
     <ContentWrapper>
       <SetupModal
         successRoute={() => navigate('/auth')}
-        getNodeUrl={getNodeUrl}
-        setNodeUrl={setStorageAppEndpointKey}
-        setApplicationId={setStorageApplicationId}
-        getApplicationId={getStorageApplicationId}
+        getNodeUrl={getAppEndpointKey}
+        setNodeUrl={setAppEndpointKey}
+        setApplicationId={setApplicationId}
+        getApplicationId={getApplicationId}
       />
     </ContentWrapper>
   );

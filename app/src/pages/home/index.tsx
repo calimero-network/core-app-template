@@ -1,6 +1,8 @@
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import {
-  clearAppEndpoint,
-  clearJWT,
+  clientLogout,
   getAccessToken,
   getAppEndpointKey,
   getRefreshToken,
@@ -8,8 +10,7 @@ import {
   ResponseData,
   SubscriptionsClient,
 } from '@calimero-network/calimero-client';
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+
 import {
   ClientApiDataSource,
   getWsSubscriptionsClient,
@@ -21,8 +22,6 @@ import {
   ResetCounterResponse,
 } from '../../api/clientApi';
 import { getContextId, getStorageApplicationId } from '../../utils/node';
-import { clearApplicationId } from '../../utils/storage';
-import { useNavigate } from 'react-router-dom';
 
 const FullPageCenter = styled.div`
   display: flex;
@@ -165,9 +164,7 @@ export default function HomePage() {
   }, []);
 
   const logout = () => {
-    clearAppEndpoint();
-    clearJWT();
-    clearApplicationId();
+    clientLogout();
     navigate('/auth');
   };
 

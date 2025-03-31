@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@calimero-network/calimero-client':
-        specifier: 1.1.0
-        version: 1.1.0(@near-wallet-selector/modal-ui@8.9.15(near-api-js@3.0.4))
+        specifier: file:../../calimero-client-js/
+        version: file:../../calimero-client-js(@near-wallet-selector/modal-ui@8.9.15(near-api-js@3.0.4))
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.18
@@ -763,8 +763,8 @@ packages:
     resolution: {integrity: sha512-vN5p+1kl59GVKMvTHt55NzzmYVxprfJD+ql7U9NFIfKCBkYE55LYtS+WtPlaYOyzydrKI8Nezd+aZextrd+FMA==}
     engines: {node: '>=6.9.0'}
 
-  '@calimero-network/calimero-client@1.1.0':
-    resolution: {integrity: sha512-gQIXAcVEZOEPWtMf0wGsj6+rjiQd5VTRx8hiG1ROVyEyjSn7RmAsYsAoKCyrWooK39+1xBQCUUNdeBR3isWoIw==}
+  '@calimero-network/calimero-client@file:../../calimero-client-js':
+    resolution: {directory: ../../calimero-client-js, type: directory}
     peerDependencies:
       '@near-wallet-selector/modal-ui': ^8.9.7
 
@@ -4275,7 +4275,7 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@calimero-network/calimero-client@1.1.0(@near-wallet-selector/modal-ui@8.9.15(near-api-js@3.0.4))':
+  '@calimero-network/calimero-client@file:../../calimero-client-js(@near-wallet-selector/modal-ui@8.9.15(near-api-js@3.0.4))':
     dependencies:
       '@near-wallet-selector/modal-ui': 8.9.15(near-api-js@3.0.4)
       axios: 1.8.2

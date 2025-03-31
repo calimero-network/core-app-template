@@ -5,6 +5,10 @@ import {
   WsSubscriptionsClient,
   RpcError,
   handleRpcError,
+  getAppEndpointKey,
+  getJWTObject,
+  JsonWebToken,
+  getContextId,
 } from '@calimero-network/calimero-client';
 import {
   ClientApi,
@@ -14,21 +18,16 @@ import {
   IncreaseCountResponse,
   ResetCounterResponse,
 } from '../clientApi';
-import { getContextId, getNodeUrl } from '../../utils/node';
-import {
-  getJWTObject,
-  getStorageAppEndpointKey,
-  JsonWebToken,
-} from '../../utils/storage';
+import { getNodeUrl } from '../../utils/node';
 import { AxiosHeader, createJwtHeader } from '../../utils/jwtHeaders';
 import { getRpcPath } from '../../utils/env';
 
 export function getJsonRpcClient() {
-  return new JsonRpcClient(getStorageAppEndpointKey() ?? '', getRpcPath());
+  return new JsonRpcClient(getAppEndpointKey() ?? '', getRpcPath());
 }
 
 export function getWsSubscriptionsClient() {
-  return new WsSubscriptionsClient(getStorageAppEndpointKey() ?? '', '/ws');
+  return new WsSubscriptionsClient(getAppEndpointKey() ?? '', '/ws');
 }
 
 function getConfigAndJwt() {
