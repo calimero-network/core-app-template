@@ -1,4 +1,4 @@
-import { getAccessToken } from "@calimero-network/calimero-client";
+import { getAccessToken } from '@calimero-network/calimero-client';
 
 export interface AxiosHeader {
   [key: string]: string;
