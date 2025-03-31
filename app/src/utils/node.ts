@@ -1,19 +1,19 @@
 import {
+  getAppEndpointKey,
+  setAppEndpointKey,
+  getContextId as getStorageContextId,
+  setContextId,
   getApplicationId,
+  setApplicationId,
   getJWTObject,
-  getStorageAppEndpointKey,
-  getStorageContextId,
-  setStorageAppEndpointKey,
-  setStorageApplicationId,
-  setStorageContextId,
-} from './storage';
+} from '@calimero-network/calimero-client';
 
 export function getNodeUrl(): string {
-  let storageKey = getStorageAppEndpointKey();
+  let storageKey = getAppEndpointKey();
 
   if (!storageKey) {
     let envKey: string = import.meta.env['VITE_NODE_URL'] ?? '';
-    setStorageAppEndpointKey(envKey);
+    setAppEndpointKey(envKey);
     return envKey;
   }
 
@@ -26,7 +26,7 @@ export function getContextId(): string {
   if (!storageContextId) {
     let jwtToken = getJWTObject();
     let envKey: string = jwtToken?.context_id ?? '';
-    setStorageContextId(envKey);
+    setContextId(envKey);
     return envKey;
   }
 
@@ -42,7 +42,7 @@ export function getStorageApplicationId(): string {
 
   if (!storageApplicationId) {
     let envKey: string = import.meta.env['VITE_APPLICATION_ID'] ?? '';
-    setStorageApplicationId(envKey);
+    setApplicationId(envKey);
     return envKey;
   }
 

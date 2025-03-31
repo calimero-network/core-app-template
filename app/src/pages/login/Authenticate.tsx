@@ -1,7 +1,6 @@
 import React from 'react';
-import { ClientLogin } from '@calimero-network/calimero-client';
+import { ClientLogin, clientLogout } from '@calimero-network/calimero-client';
 import { useNavigate } from 'react-router-dom';
-import { clearAppEndpoint, clearApplicationId } from '../../utils/storage';
 import { getNodeUrl, getStorageApplicationId } from '../../utils/node';
 import { styled } from 'styled-components';
 import ContentWrapper from '../../components/login/ContentWrapper';
@@ -55,8 +54,7 @@ export default function Authenticate() {
   const navigate = useNavigate();
 
   function onSetupClick() {
-    clearAppEndpoint();
-    clearApplicationId();
+    clientLogout();
     navigate('/');
   }
 
