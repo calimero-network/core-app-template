@@ -140,7 +140,9 @@ export default function HomePage() {
   }
 
   useEffect(() => {
-    getCount();
+    if (accessToken) {
+      getCount();
+    }
   }, []);
 
   const observeNodeEvents = async () => {
