@@ -1,5 +1,8 @@
 import React from 'react';
-import { ClientLogin, clientLogout } from '@calimero-network/calimero-client';
+import {
+  clearAccessToken,
+  ClientLogin,
+} from '@calimero-network/calimero-client';
 import { useNavigate } from 'react-router-dom';
 import { getNodeUrl, getStorageApplicationId } from '../../utils/node';
 import { styled } from 'styled-components';
@@ -54,7 +57,7 @@ export default function Authenticate() {
   const navigate = useNavigate();
 
   function onSetupClick() {
-    clientLogout();
+    clearAccessToken();
     navigate('/');
   }
 
