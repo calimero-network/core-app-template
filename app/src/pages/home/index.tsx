@@ -143,7 +143,7 @@ export default function HomePage() {
     if (accessToken) {
       getCount();
     }
-  }, []);
+  }, [accessToken]);
 
   const observeNodeEvents = async () => {
     let subscriptionsClient: SubscriptionsClient = getWsSubscriptionsClient();
