@@ -33,10 +33,6 @@ export function getContextId(): string {
   return storageContextId ?? '';
 }
 
-export function getNearEnvironment(): string {
-  return import.meta.env['VITE_NEAR_ENVIRONMENT'] ?? 'testnet';
-}
-
 export function getStorageApplicationId(): string {
   let storageApplicationId = getApplicationId();
 
