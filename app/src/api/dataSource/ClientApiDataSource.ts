@@ -15,7 +15,6 @@ import {
   IncreaseCountResponse,
   ResetCounterResponse,
 } from '../clientApi';
-import { getNodeUrl } from '../../utils/node';
 
 export function getJsonRpcClient() {
   const appEndpointKey = getAppEndpointKey();
@@ -44,12 +43,12 @@ export class ClientApiDataSource implements ClientApi {
     callbackFunction: any,
   ) {
     if (error && error.code) {
-      const response = await handleRpcError(error, getNodeUrl);
+      const response = await handleRpcError(error, getAppEndpointKey);
       if (response.code === 403) {
         return await callbackFunction(params);
       }
       return {
-        error: await handleRpcError(error, getNodeUrl),
+        error: await handleRpcError(error, getAppEndpointKey),
       };
     }
   }

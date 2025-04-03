@@ -4,11 +4,10 @@ import HomePage from './pages/home';
 import SetupPage from './pages/setup';
 import Authenticate from './pages/login/Authenticate';
 import { AccessTokenWrapper } from '@calimero-network/calimero-client';
-import { getNodeUrl } from './utils/node';
 
 export default function App() {
   return (
-    <AccessTokenWrapper getNodeUrl={getNodeUrl}>
+    <AccessTokenWrapper>
       <BrowserRouter basename="/core-app-template/">
         <Routes>
           <Route path="/" element={<SetupPage />} />

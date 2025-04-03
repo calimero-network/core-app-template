@@ -4,7 +4,6 @@ import {
   ClientLogin,
 } from '@calimero-network/calimero-client';
 import { useNavigate } from 'react-router-dom';
-import { getNodeUrl, getStorageApplicationId } from '../../utils/node';
 import { styled } from 'styled-components';
 import ContentWrapper from '../../components/login/ContentWrapper';
 
@@ -70,8 +69,6 @@ export default function Authenticate() {
               <div className="title">App template</div>
             </div>
             <ClientLogin
-              getNodeUrl={getNodeUrl}
-              getApplicationId={getStorageApplicationId}
               sucessRedirect={() => navigate('/home')}
             />
           </div>
