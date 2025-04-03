@@ -5,6 +5,8 @@ import {
   clientLogout,
   getAccessToken,
   getAppEndpointKey,
+  getApplicationId,
+  getContextId,
   getRefreshToken,
   NodeEvent,
   ResponseData,
@@ -21,7 +23,6 @@ import {
   IncreaseCountResponse,
   ResetCounterResponse,
 } from '../../api/clientApi';
-import { getContextId, getStorageApplicationId } from '../../utils/node';
 
 const FullPageCenter = styled.div`
   display: flex;
@@ -90,7 +91,7 @@ const LogoutButton = styled.div`
 export default function HomePage() {
   const navigate = useNavigate();
   const url = getAppEndpointKey();
-  const applicationId = getStorageApplicationId();
+  const applicationId = getApplicationId();
   const accessToken = getAccessToken();
   const refreshToken = getRefreshToken();
   const [count, setCount] = useState<number | null>(null);
@@ -148,7 +149,7 @@ export default function HomePage() {
   const observeNodeEvents = async () => {
     let subscriptionsClient: SubscriptionsClient = getWsSubscriptionsClient();
     await subscriptionsClient.connect();
-    subscriptionsClient.subscribe([getContextId()]);
+    subscriptionsClient.subscribe([getContextId() ?? '']);
 
     subscriptionsClient?.addCallback((data: NodeEvent) => {
       if (data.data.events && data.data.events.length > 0) {
