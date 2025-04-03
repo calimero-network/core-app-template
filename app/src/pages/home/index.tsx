@@ -152,12 +152,20 @@ export default function HomePage() {
     subscriptionsClient.subscribe([getContextId() ?? '']);
 
     subscriptionsClient?.addCallback((data: NodeEvent) => {
-      if (data.data.events && data.data.events.length > 0) {
-        let currentValue = String.fromCharCode(...data.data.events[0].data);
-        let currentValueInt = isNaN(parseInt(currentValue))
-          ? 0
-          : parseInt(currentValue);
-        setCount(currentValueInt);
+      if (
+        'events' in data.data &&
+        Array.isArray(data.data.events) &&
+        data.data.events.length > 0
+      ) {
+        const event = data.data.events[0];
+        if (event.data && Array.isArray(event.data)) {
+          let currentValue = String.fromCharCode(...event.data);
+          let currentValueInt = parseInt(currentValue);
+          if (isNaN(currentValueInt)) {
+            currentValueInt = 0;
+          }
+          setCount(currentValueInt);
+        }
       }
     });
   };
@@ -168,7 +176,7 @@ export default function HomePage() {
 
   const logout = () => {
     clientLogout();
-    navigate('/auth');
+    navigate('/');
   };
 
   return (
