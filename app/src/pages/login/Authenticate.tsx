@@ -68,9 +68,7 @@ export default function Authenticate() {
             <div className="title-wrapper">
               <div className="title">App template</div>
             </div>
-            <ClientLogin
-              sucessRedirect={() => navigate('/home')}
-            />
+            <ClientLogin sucessRedirect={() => navigate('/home')} />
           </div>
           <div className="back-button" onClick={onSetupClick}>
             Return to setup
