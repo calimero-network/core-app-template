@@ -189,6 +189,9 @@ export default function HomePage() {
       <StatusValue> {count ?? '-'}</StatusValue>
       <Button onClick={increaseCounter}> + 1</Button>
       <ButtonReset onClick={resetCount}> Reset</ButtonReset>
+      <LogoutButton onClick={() => navigate('/context')}>
+        Context Actions
+      </LogoutButton>
       <LogoutButton onClick={logout}>Logout</LogoutButton>
     </FullPageCenter>
   );

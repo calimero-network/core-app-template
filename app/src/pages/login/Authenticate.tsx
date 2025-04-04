@@ -50,6 +50,10 @@ const Wrapper = styled.div`
     padding: 2rem;
     border-radius: 0.5rem;
   }
+
+  .context-button {
+    cursor: pointer;
+  }
 `;
 
 export default function Authenticate() {
@@ -72,6 +76,9 @@ export default function Authenticate() {
           </div>
           <div className="back-button" onClick={onSetupClick}>
             Return to setup
+          </div>
+          <div className="context-button" onClick={() => navigate('/context')}>
+            Go to context Actions
           </div>
         </div>
       </Wrapper>
