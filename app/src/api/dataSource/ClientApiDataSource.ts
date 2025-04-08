@@ -1,10 +1,11 @@
 import {
   ApiResponse,
   JsonRpcClient,
-  RequestConfig,
   WsSubscriptionsClient,
   RpcError,
   handleRpcError,
+  getAppEndpointKey,
+  prepareAuthenticatedRequestConfig,
 } from '@calimero-network/calimero-client';
 import {
   ClientApi,
@@ -14,48 +15,25 @@ import {
   IncreaseCountResponse,
   ResetCounterResponse,
 } from '../clientApi';
-import { getContextId, getNodeUrl } from '../../utils/node';
-import {
-  getJWTObject,
-  getStorageAppEndpointKey,
-  JsonWebToken,
-} from '../../utils/storage';
-import { AxiosHeader, createJwtHeader } from '../../utils/jwtHeaders';
-import { getRpcPath } from '../../utils/env';
 
 export function getJsonRpcClient() {
-  return new JsonRpcClient(getStorageAppEndpointKey() ?? '', getRpcPath());
+  const appEndpointKey = getAppEndpointKey();
+  if (!appEndpointKey) {
+    throw new Error(
+      'Application endpoint key is missing. Please check your configuration.',
+    );
+  }
+  return new JsonRpcClient(appEndpointKey, '/jsonrpc');
 }
 
 export function getWsSubscriptionsClient() {
-  return new WsSubscriptionsClient(getStorageAppEndpointKey() ?? '', '/ws');
-}
-
-function getConfigAndJwt() {
-  const jwtObject: JsonWebToken | null = getJWTObject();
-  const headers: AxiosHeader | null = createJwtHeader();
-  if (!headers) {
-    return {
-      error: { message: 'Failed to create auth headers', code: 500 },
-    };
+  const appEndpointKey = getAppEndpointKey();
+  if (!appEndpointKey) {
+    throw new Error(
+      'Application endpoint key is missing. Please check your configuration.',
+    );
   }
-  if (!jwtObject) {
-    return {
-      error: { message: 'Failed to get JWT token', code: 500 },
-    };
-  }
-  if (jwtObject.executor_public_key === null) {
-    return {
-      error: { message: 'Failed to get executor public key', code: 500 },
-    };
-  }
-
-  const config: RequestConfig = {
-    headers: headers,
-    timeout: 10000,
-  };
-
-  return { jwtObject, config };
+  return new WsSubscriptionsClient(appEndpointKey, '/ws');
 }
 
 export class ClientApiDataSource implements ClientApi {
@@ -65,92 +43,147 @@ export class ClientApiDataSource implements ClientApi {
     callbackFunction: any,
   ) {
     if (error && error.code) {
-      const response = await handleRpcError(error, getNodeUrl);
+      const response = await handleRpcError(error, getAppEndpointKey);
       if (response.code === 403) {
         return await callbackFunction(params);
       }
       return {
-        error: await handleRpcError(error, getNodeUrl),
+        error: await handleRpcError(error, getAppEndpointKey),
       };
     }
   }
+
   async getCount(): ApiResponse<GetCountResponse> {
-    const { jwtObject, config, error } = getConfigAndJwt();
-    if (error) {
-      return { error };
-    }
+    try {
+      const { publicKey, contextId, config, error } =
+        prepareAuthenticatedRequestConfig();
+      if (error) {
+        return { error };
+      }
 
-    const response = await getJsonRpcClient().query<any, GetCountResponse>(
-      {
-        contextId: jwtObject?.context_id ?? getContextId(),
-        method: ClientMethod.GET_COUNT,
-        argsJson: {},
-        executorPublicKey: jwtObject.executor_public_key,
-      },
-      config,
-    );
-    if (response?.error) {
-      return await this.handleError(response.error, {}, this.getCount);
-    }
+      const response = await getJsonRpcClient().execute<any, GetCountResponse>(
+        {
+          contextId: contextId,
+          method: ClientMethod.GET_COUNT,
+          argsJson: {},
+          executorPublicKey: publicKey,
+        },
+        config,
+      );
+      if (response?.error) {
+        return await this.handleError(response.error, {}, this.getCount);
+      }
 
-    return {
-      data: { count: Number(response?.result?.output) ?? 0 },
-      error: null,
-    };
+      return {
+        data: { count: Number(response?.result?.output) ?? 0 },
+        error: null,
+      };
+    } catch (error) {
+      console.error('getCount failed:', error);
+      let errorMessage = 'An unexpected error occurred during getCount';
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === 'string') {
+        errorMessage = error;
+      }
+      return {
+        error: {
+          code: 500,
+          message: errorMessage,
+        },
+      };
+    }
   }
 
   async increaseCount(
     params: IncreaseCountRequest,
   ): ApiResponse<IncreaseCountResponse> {
-    const { jwtObject, config, error } = getConfigAndJwt();
-    if (error) {
-      return { error };
-    }
+    try {
+      const { publicKey, contextId, config, error } =
+        prepareAuthenticatedRequestConfig();
 
-    const response = await getJsonRpcClient().mutate<
-      IncreaseCountRequest,
-      IncreaseCountResponse
-    >(
-      {
-        contextId: jwtObject?.context_id ?? getContextId(),
-        method: ClientMethod.INCREASE_COUNT,
-        argsJson: params,
-        executorPublicKey: jwtObject.executor_public_key,
-      },
-      config,
-    );
-    if (response?.error) {
-      return await this.handleError(response.error, {}, this.increaseCount);
-    }
+      if (error) {
+        return { error };
+      }
+      const response = await getJsonRpcClient().execute<
+        IncreaseCountRequest,
+        IncreaseCountResponse
+      >(
+        {
+          contextId: contextId,
+          method: ClientMethod.INCREASE_COUNT,
+          argsJson: params,
+          executorPublicKey: publicKey,
+        },
+        config,
+      );
+      if (response?.error) {
+        return await this.handleError(response.error, {}, this.increaseCount);
+      }
 
-    return {
-      data: Number(response?.result?.output) ?? null,
-      error: null,
-    };
+      return {
+        data: Number(response?.result?.output) ?? null,
+        error: null,
+      };
+    } catch (error) {
+      console.error('increaseCount failed:', error);
+      let errorMessage = 'An unexpected error occurred during increaseCount';
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === 'string') {
+        errorMessage = error;
+      }
+      return {
+        error: {
+          code: 500,
+          message: errorMessage,
+        },
+      };
+    }
   }
 
   async reset(): ApiResponse<ResetCounterResponse> {
-    const { jwtObject, config, error } = getConfigAndJwt();
-    if (error) {
-      return { error };
-    }
+    try {
+      const { publicKey, contextId, config, error } =
+        prepareAuthenticatedRequestConfig();
+      if (error) {
+        return { error };
+      }
 
-    const response = await getJsonRpcClient().mutate<any, ResetCounterResponse>(
-      {
-        contextId: jwtObject?.context_id ?? getContextId(),
-        method: ClientMethod.RESET,
-        argsJson: {},
-        executorPublicKey: jwtObject.executor_public_key,
-      },
-      config,
-    );
-    if (response?.error) {
-      return await this.handleError(response.error, {}, this.reset);
-    }
+      const response = await getJsonRpcClient().execute<
+        any,
+        ResetCounterResponse
+      >(
+        {
+          contextId: contextId,
+          method: ClientMethod.RESET,
+          argsJson: {},
+          executorPublicKey: publicKey,
+        },
+        config,
+      );
+      if (response?.error) {
+        return await this.handleError(response.error, {}, this.reset);
+      }
 
-    return {
-      data: Number(response?.result?.output) ?? null,
-      error: null,
-    };
+      return {
+        data: Number(response?.result?.output) ?? null,
+        error: null,
+      };
+    } catch (error) {
+      console.error('reset failed:', error);
+      let errorMessage = 'An unexpected error occurred during reset';
+      if (error instanceof Error) {
+        errorMessage = error.message;
+      } else if (typeof error === 'string') {
+        errorMessage = error;
+      }
+      return {
+        error: {
+          code: 500,
+          message: errorMessage,
+        },
+      };
+    }
   }
 }

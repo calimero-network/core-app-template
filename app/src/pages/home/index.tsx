@@ -1,15 +1,18 @@
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import {
-  clearAppEndpoint,
-  clearJWT,
+  clientLogout,
   getAccessToken,
   getAppEndpointKey,
+  getApplicationId,
+  getContextId,
   getRefreshToken,
   NodeEvent,
   ResponseData,
   SubscriptionsClient,
 } from '@calimero-network/calimero-client';
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+
 import {
   ClientApiDataSource,
   getWsSubscriptionsClient,
@@ -20,9 +23,6 @@ import {
   IncreaseCountResponse,
   ResetCounterResponse,
 } from '../../api/clientApi';
-import { getContextId, getStorageApplicationId } from '../../utils/node';
-import { clearApplicationId } from '../../utils/storage';
-import { useNavigate } from 'react-router-dom';
 
 const FullPageCenter = styled.div`
   display: flex;
@@ -91,7 +91,7 @@ const LogoutButton = styled.div`
 export default function HomePage() {
   const navigate = useNavigate();
   const url = getAppEndpointKey();
-  const applicationId = getStorageApplicationId();
+  const applicationId = getApplicationId();
   const accessToken = getAccessToken();
   const refreshToken = getRefreshToken();
   const [count, setCount] = useState<number | null>(null);
@@ -141,21 +141,31 @@ export default function HomePage() {
   }
 
   useEffect(() => {
-    getCount();
-  }, []);
+    if (accessToken) {
+      getCount();
+    }
+  }, [accessToken]);
 
   const observeNodeEvents = async () => {
     let subscriptionsClient: SubscriptionsClient = getWsSubscriptionsClient();
     await subscriptionsClient.connect();
-    subscriptionsClient.subscribe([getContextId()]);
+    subscriptionsClient.subscribe([getContextId() ?? '']);
 
     subscriptionsClient?.addCallback((data: NodeEvent) => {
-      if (data.data.events && data.data.events.length > 0) {
-        let currentValue = String.fromCharCode(...data.data.events[0].data);
-        let currentValueInt = isNaN(parseInt(currentValue))
-          ? 0
-          : parseInt(currentValue);
-        setCount(currentValueInt);
+      if (
+        'events' in data.data &&
+        Array.isArray(data.data.events) &&
+        data.data.events.length > 0
+      ) {
+        const event = data.data.events[0];
+        if (event.data && Array.isArray(event.data)) {
+          let currentValue = String.fromCharCode(...event.data);
+          let currentValueInt = parseInt(currentValue);
+          if (isNaN(currentValueInt)) {
+            currentValueInt = 0;
+          }
+          setCount(currentValueInt);
+        }
       }
     });
   };
@@ -165,10 +175,8 @@ export default function HomePage() {
   }, []);
 
   const logout = () => {
-    clearAppEndpoint();
-    clearJWT();
-    clearApplicationId();
-    navigate('/auth');
+    clientLogout();
+    navigate('/');
   };
 
   return (
@@ -181,6 +189,9 @@ export default function HomePage() {
       <StatusValue> {count ?? '-'}</StatusValue>
       <Button onClick={increaseCounter}> + 1</Button>
       <ButtonReset onClick={resetCount}> Reset</ButtonReset>
+      <LogoutButton onClick={() => navigate('/context')}>
+        Context Actions
+      </LogoutButton>
       <LogoutButton onClick={logout}>Logout</LogoutButton>
     </FullPageCenter>
   );

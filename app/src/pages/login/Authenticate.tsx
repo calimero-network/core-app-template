@@ -1,8 +1,9 @@
 import React from 'react';
-import { ClientLogin } from '@calimero-network/calimero-client';
+import {
+  clearAccessToken,
+  ClientLogin,
+} from '@calimero-network/calimero-client';
 import { useNavigate } from 'react-router-dom';
-import { clearAppEndpoint, clearApplicationId } from '../../utils/storage';
-import { getNodeUrl, getStorageApplicationId } from '../../utils/node';
 import { styled } from 'styled-components';
 import ContentWrapper from '../../components/login/ContentWrapper';
 
@@ -49,14 +50,17 @@ const Wrapper = styled.div`
     padding: 2rem;
     border-radius: 0.5rem;
   }
+
+  .context-button {
+    cursor: pointer;
+  }
 `;
 
 export default function Authenticate() {
   const navigate = useNavigate();
 
   function onSetupClick() {
-    clearAppEndpoint();
-    clearApplicationId();
+    clearAccessToken();
     navigate('/');
   }
 
@@ -68,14 +72,13 @@ export default function Authenticate() {
             <div className="title-wrapper">
               <div className="title">App template</div>
             </div>
-            <ClientLogin
-              getNodeUrl={getNodeUrl}
-              getApplicationId={getStorageApplicationId}
-              sucessRedirect={() => navigate('/home')}
-            />
+            <ClientLogin sucessRedirect={() => navigate('/home')} />
           </div>
           <div className="back-button" onClick={onSetupClick}>
             Return to setup
+          </div>
+          <div className="context-button" onClick={() => navigate('/context')}>
+            Go to context actions
           </div>
         </div>
       </Wrapper>
