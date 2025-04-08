@@ -78,7 +78,7 @@ export default function Authenticate() {
             Return to setup
           </div>
           <div className="context-button" onClick={() => navigate('/context')}>
-            Go to context Actions
+            Go to context actions
           </div>
         </div>
       </Wrapper>
